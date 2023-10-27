@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@Html.Partial("_AdmMenuPartialView")
+<div align="center">
+    <h4><i class="glyphicon glyphicon-align-justify"></i> Controle - Reuniões, Moderadores e Participantes</h4>
+</div>
+<hr />
+<div class="container body-content" style="padding-left: 3%;">
+
+    <div class="container">
+
+        <table id="jqGridReuniao"></table>
+        <div id="jqControlsReuniao"></div>
+        <br />
+        <div class="row">
+            <div class="col-lg-6" align="left">
+                <div class="col-lg-2">@Html.Label("ReuniaoId:")&nbsp;</div><div class="col-lg-3">@Html.Editor("ReuniaoId", new { htmlAttributes = new { @class = "form-control AlterarEmp", @disabled = "disabled" } })</div>
+            </div>
+            <div class="col-lg-6" align="right">
+                <button class="btn btn-default btnEdtEmp" id="" onclick="GerenciarUser($('#ReuniaoId').val())">Alterar&nbsp;<i class="glyphicon glyphicon-pencil"></i></button>&nbsp;<button class="btn btn-default btnContCC" id="">Excluir&nbsp;<i class="glyphicon glyphicon-wrench"></i></button>&nbsp;<button class="btn btn-default" onclick="CreateReuniao()">Cadastrar&nbsp;<i class="glyphicon glyphicon-plus"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="MeuModal">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="~/Scripts/Repositories/ReuniaoRepositorie.js"></script>
+    <script src="~/Scripts/Repositories/ItemReuRepositorie.js"></script>
+    <script src="~/Scripts/Repositories/GridRepositorie.js"></script>
+    <script src="~/Scripts/Interface/AdminInter.js"></script>
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/ui.jqgrid.css" rel="stylesheet" />
+    <script src="~/Scripts/free-jqGrid/i18n/grid.locale-en.js"></script>
+    <script src="~/Scripts/free-jqGrid/jquery.jqGrid.min.js"></script>
+    <script src="~/Scripts/free-jqGrid/jquery.jqgrid.min.js"></script>
+}

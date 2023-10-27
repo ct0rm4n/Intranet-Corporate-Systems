@@ -1,0 +1,77 @@
+﻿@model IntraNet.Mod.SGR.Models.ViewModel.EditReuniaoViewModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = null;
+}
+@using (Ajax.BeginForm("Edit", "Reuniao", new AjaxOptions { OnBegin = "", OnFailure = "" }, new { id = "Edit" }))
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <h4><i class="fa fa-pencil">&nbsp;</i>Editar Reuniao&nbsp;<i class="fa fa-handshake-o"></i></h4>
+        <hr />
+        <div>
+            @Html.HiddenFor(model=>model.ReuniaoId)
+            <div class="form-horizontal" align="left">
+                <div id="result"></div>
+                <div class="container" align="left">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div id="result"></div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SetorId, "Setor:", htmlAttributes: new { @class = "control-label col-md-5" })
+                        @Html.DropDownList("SetorId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SetorId, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Nome, "Nome:", htmlAttributes: new { @class = "control-label col-md-5" })
+                        @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                    </div>
+                    <hr />
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <select class="form-control" id="UserId" name="UserId" style="width: 100%;"></select>
+                            </div>
+                            <div class="col-lg-4">
+                                @Html.DropDownList("Acesso", null, "--Selecione--", htmlAttributes: new { @class = "form-control" })
+                            </div>
+                            <div class="col-lg-1">
+                                <a onclick="addRow('ListaParticipantesT')" class="btn btn-default btnReuniao"><i class="fa fa-user-plus"></i></a>
+                            </div>
+                        </div>
+                        <table id="ListaParticipantesT" style="width:100%">
+                            <tr>
+                                <th><i class="fa fa-users">&nbsp;</i>Participantes</th>
+                                <th><i class="fa fa-key">&nbsp;</i>Acesso</th>
+                                <th>Ações</th>
+                            </tr>
+                            @foreach (var item in ViewBag.ListaModerador)
+                            {
+                                <tr id="@item.Text"><td>@item.Text</td><td>Moderador</td><td><i class="fa fa-trash-o" onclick="RemoveRow('+@item.Text.ToString()+','Moderador')"></i></td></tr>
+                            }
+                            @foreach (var item in ViewBag.ListaParticipantes)
+                            {
+                                <tr id="@item.Text"><td>@item.Text</td><td>Participante</td><td ><i class="fa fa-trash-o" onclick="RemoveRow('+@item.Text.ToString()+','Participante')"></i></td></tr>
+                            }
+                        </table>
+                        <div>
+
+                            <div align="right" style="display:none;padding-left:2%;">
+                                @Html.ListBox("ListaModerador", null, htmlAttributes: new { @class = "form-control", @Value=ViewBag.ListaModerador, Multiple = "multiple" })
+
+                                @Html.ListBox("ListaParticipantes", null, htmlAttributes: new { @class = "form-control", @Value = ViewBag.ListaParticipantes, Multiple = "multiple" })
+
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <script src="~/Scripts/Interface/ReuniaoInter.js"></script>
+                    <br />
+                </div>
+                <div align="right">
+                    <button type="button" id="Salvar" class="btn btn-default btnReuniao" onclick="EditarReuniao()"><i class="fa fa-fw fa-floppy-o">&nbsp;</i> Salvar</button><button type="button" id="Salvar" class="btn btn-default btnReuniao" onclick="$('.modal fade, #myModal').hide()"> <i class="fa fa-fw fa-ban">&nbsp;</i>Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

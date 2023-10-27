@@ -1,0 +1,59 @@
+﻿@model IntraNet.Domain.Entities.SolicitaCCusto
+
+@{
+    ViewBag.Title = "Create";
+    Layout = null;
+}
+
+<h4>Disponibilizar Centro de Custo</h4>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr/>
+        <p>Permitir Centro de Custo</p>
+        <hr/>
+        <div class="alert alert-danger" id="AlertC"></div>
+        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserId, htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model=>model.UserId, new {htmlAttributes = new {@class = "form-control", @disabled = "disabled"}})
+                @Html.ValidationMessageFor(model => model.UserId, "", new {@class = "text-danger"})
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.SolicitaEmpresaId, "Empresa:", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("SolicitaEmpresaId", null,"Selecione a Empresa", htmlAttributes: new { @class = "form-control", @onchange = "CCSelector()" })
+                @Html.ValidationMessageFor(model => model.SolicitaEmpresaId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmpCCustoId, "Centro de Custo:", htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.DropDownList("EmpCCustoId", null,"Selecione o C.Custo", htmlAttributes: new {@class = "form-control",@disabled ="disabled", @onchange="CCProjSelector"})
+                @Html.ValidationMessageFor(model => model.EmpCCustoId, "", new {@class = "text-danger"})
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="row" align="right">
+                <div class="col-md-12">
+                    <button type="button" value="Salvar" id="Salvar" class="btn btn-default" onclick="CadastrarSolictCCController()"> Salvar &nbsp;<i class="glyphicon glyphicon-ok"></i></button>
+                    <button type="button" value="Salvar" id="btnSolicCCAddCancel" class="btn btn-default" onclick="Finaliza()"> Cancelar &nbsp;<i class="glyphicon glyphicon-remove"></i></button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,11 @@
+﻿@model IntraNet.Mod.RDV.Models.ViewModel.EmpresaViewModel
+@{ 
+    Layout = null;
+}
+<h2>Controle de CC:</h2>
+<div class="col-md-8">
+    @Html.LabelFor(model => model.EmpresaId, "Selecione a empresa:", htmlAttributes: new { @class = "control-label col-md-5" })
+    @Html.DropDownList("EmpresaId", null, htmlAttributes: new { @class = "form-control" })
+    <button class="btn btn-default btnControle" onclick="ControleCC()">Gerenciar</button>
+</div>
+

@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@Html.Partial("_AdmMenuPartialView")
+<h2 align="center"><i class="glyphicon glyphicon-align-justify">&nbsp;</i>&nbsp;Controle - Reuniões, Moderadores e Participantes</h2>
+<div class="container body-content" align="right" style="padding-left: 15%">
+
+    <hr />
+    <!-- DEVE FILTRAR A REUNIAO QUE USUÁRIO PARTICIPA-->
+    
+    <br />
+    <button class="btn btn-default" onclick="Novo()">Cadastrar&nbsp;<i class="glyphicon glyphicon-plus"></i></button>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="MeuModal">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/jquery.jqGrid/ui.jqgrid.css" rel="stylesheet" />
+    <script src="~/Scripts/i18n/grid.locale-en.js"></script>
+    <script src="~/Scripts/jquery.jqGrid.min.js"></script>
+    <script src="~/Scripts/Interface/AdminInter.js"></script>
+}  

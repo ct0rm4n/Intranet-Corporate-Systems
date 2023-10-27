@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "RelatorioGerencial";
+    Layout = null;
+}
+<h4><i class="fa fa-file-archive-o">&nbsp;</i>Relatórios&nbsp;&nbsp;<i class="fa fa-caret-right">&nbsp;</i>&nbsp;Demandas e Açoes:&nbsp;<i class="fa fa-search">&nbsp;</i> Filtros</h4>
+<hr/>
+<div>
+    @using (Ajax.BeginForm("Pesquisa", "ReportCrystal", new AjaxOptions { OnBegin = "", OnFailure = "" }, new { id = "Pesquisa" }))
+    {
+    <div class="form-vertical">
+        <div class="container row">
+            <div class="row col-lg-12">
+                <label class="col-lg-3">Reuniao:</label><div class="col-lg-7">@Html.DropDownList("ReuniaoId", null, "--Selecione--", htmlAttributes: new { @class = "form-control" })&nbsp;</div>
+            </div>
+            <div class="row col-lg-12">
+                <label class="col-lg-3">Assunto:</label><div class="col-lg-7">@Html.DropDownList("ItemAssuntoId", null, "--Todos--", htmlAttributes: new { @class = "form-control", @disabled = "disabled" })&nbsp;</div>
+            </div>
+            <div class="row col-lg-12">
+                <label class="col-lg-3">Item:&nbsp;</label><div class="col-lg-7">@Html.DropDownList("ItemAssuntoId", null, "--Todos--", htmlAttributes: new { @class = "form-control", @disabled = "disabled" })</div>
+            </div>
+            <br/>
+            <div class="row col-lg-10 ">
+                <br/>
+                <label class="col-lg-1">Dê:</label>
+                <div class="col-lg-5">@Html.Editor("De", new { htmlAttributes = new { @class = "form-control datefield", type = "date", @placeholder = "__/__/__" } })</div>
+                <label class="col-lg-1">Até:</label>
+                <div class="col-lg-5">@Html.Editor("Ate", new { htmlAttributes = new { @class = "form-control datefield", type = "date", @placeholder = "__/__/__" } })</div>
+            </div>
+        </div>
+    </div>
+    }
+</div>
+<hr/>
+<div align="right">
+    <div class="container row col-lg-10">
+        <button class="btn btn-default btnReuniao" onclick="location.href = '@Url.Action("UserReportDemandaPorItem", "ReportCrystal", new {id = 20})'"><i class="fa fa-file-pdf-o"></i>&nbsp;Emitir</button>&nbsp;&nbsp;<button class="btn btn-default btnReuniao"><i class="fa fa-ban"></i>Cancelar</button>
+    </div>
+    <br/>
+    <br/>
+</div>
+
+
+

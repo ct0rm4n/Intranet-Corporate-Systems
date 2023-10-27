@@ -1,0 +1,49 @@
+﻿@model IEnumerable<IntraNet.Domain.Entities.Despesas>
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayName("Tipo da despesa:")
+        </th>
+        <th>
+            @Html.DisplayName("Valores R$:")
+        </th>
+        
+        <th>
+            @Html.DisplayName("Descrição:")
+        </th>
+        <th>
+            @Html.DisplayName("Observações:")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.tipodespesa.Tipo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Valor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descricao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Observacao)
+        </td>
+        
+        <td>
+            @{
+                var ID = item.DespesasId;
+            }            
+            <button onclick="DeletarDesp(@ID)" class="btn btn-default">Remover&nbsp;<i class="glyphicon glyphicon-remove"></i></button>
+        </td>
+    </tr>
+}
+
+</table>

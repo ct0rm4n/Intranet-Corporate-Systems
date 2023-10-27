@@ -1,0 +1,49 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    var user = User.Identity.GetUserName();
+}
+<body>
+    <div id="lateral">
+        <div align="center">
+            <img src='@Html.Action("UserAvatar", "Manage")' onclick="GerenciarAvatar()" id="AvatarUser" width="70%"/>
+        </div>
+        <br />
+        <div class="dropbtnLegenda">
+            <div align="left">
+                <i class="fa fa-address-card-o">&nbsp;</i>@user.ToString()<br />
+            </div>
+        </div>
+        <br />
+        <div class="Menulateral" align="left">
+            <div class="dropdown">
+
+                <button data-toggle="collapse" data-target="#cadast" class="dropbtn"><i class="fa fa-handshake-o" style="float:left"></i>Reunião<i class="glyphicon glyphicon-chevron-right" id="icon_Menu_right" style="float: right"></i></button>
+
+
+                <!--<button data-toggle="collapse" data-target="#cadast" class="dropbtn"><i class="fa fa-cogs fa" style="float:left"></i>Controle<i class="glyphicon glyphicon-chevron-down" id="icon_Menu_right" style="float: right"></i></button>
+                <ul class="sub-menu collapse" id="cadast">
+                    <li class="dropdown-content">
+                        <a href="@Url.Action("Index", "Relatorio")">&nbsp;<i class="fa fa-users" style="float:left">&nbsp;</i>Usuários</a>
+                        <a href="@Url.Action("Index", "Financeiro")">&nbsp;<i class="fa fa-handshake-o" style="float:left">&nbsp;</i>Reunião</a>
+                        <a href="@Url.Action("Index", "Relatorio")">&nbsp;<i class="fa fa-university" style="float:left">&nbsp;</i>Empresa</a>
+                        <a href="@Url.Action("Index", "Financeiro")">&nbsp;<i class="fa fa-window-restore" style="float:left">&nbsp;</i>Unidade</a>
+                        <a href="@Url.Action("Index", "Financeiro")">&nbsp;<i class="fa fa-list-alt" style="float:left">&nbsp;</i>Função</a>
+                        <a href="@Url.Action("Index", "Financeiro")">&nbsp;<i class="fa fa-list-alt" style="float:left">&nbsp;</i>Privilégio</a>
+                    </li>
+                </ul>
+                <button data-toggle="collapse" data-target="#cadast" class="dropbtn"><i class="fa fa-file-archive-o" style="float:left"></i>Relatórios<i class="glyphicon glyphicon-chevron-right" id="icon_Menu_right" style="float: right"></i></button>
+
+                -->
+
+
+
+                
+                <button data-toggle="collapse" data-target="#reuniao" class="dropbtn"><i class="fa fa-tachometer" style="float:left"></i>Dashboard<i class="glyphicon glyphicon-chevron-right" id="icon_Menu_right" style="float: right"></i></button>
+
+                <br />
+            </div>
+            <!-- mais seções -->
+        </div> <!-- /#menu -->
+    </div> <!-- vazio --> <div>
+    </div> <!-- /#lateral -->
+</body>

@@ -1,0 +1,19 @@
+﻿@model IntraNet.Domain.Entities.RateioItem
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = null;
+}
+
+<h2>Deletar</h2>
+
+<h3>Tem certeza que deseja remover o Rateio para Centro de Custo: @Html.DisplayFor(model => model.empsCCusto.CCusto)?</h3>
+<div>
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+        </div>
+    }
+</div>

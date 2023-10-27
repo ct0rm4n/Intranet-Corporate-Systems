@@ -1,0 +1,172 @@
+﻿@model IEnumerable<IntraNet.Domain.Entities.Relatorio>
+
+@{
+    ViewBag.Title = "Index";
+    List<int> relatid = new List<int>();
+}
+@helper DateFormatter(object date)
+{
+var shortDateLocalFormat = "";
+if (date != null)
+{
+    shortDateLocalFormat = ((DateTime)date).ToString("d/M/yyyy");
+}
+
+    @shortDateLocalFormat
+}
+<div class="panel panel-primary" style="width: 100%">
+
+    <div class="panel-heading">
+
+        <div align="center" class="panel-title row">
+            <h4 class="col-md-8">
+                <img src="~/Images/relat_icon.png" width="6%" />&nbsp;&nbsp;Controle - Lista de Relatórios( Moderador ) 
+            </h4>
+            <div class="col-lg-4" align="right">
+                <button class="btn btn-default" onclick="PesquisaRelatorio()"><i class="fa fa-search"></i></button><button class="btn btn-default" onclick="location.href ='@Url.Action("Create", "Relatorio")'" disabled>Criar relatório &nbsp;<i class="glyphicon glyphicon-plus"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-body">
+
+        <div>
+            <table class="table">
+                <tr>
+
+                    <th>
+                        <div class="dropdown">
+                            <span><i class="glyphicon glyphicon-question-sign"></i>&nbsp;<b>Sit</b></span>
+                            <div class="dropdown-content" id="ListaLegenda">
+                                <p align="center">&nbsp;*Situações</p>
+                                <hr />
+                                <p><img src="~/Images/Legendas/legenda_incompleto.png" width="15" />&nbsp; - &nbsp; Incompleto</p>
+                                <p><img src="~/Images/Legendas/legenda_pen_revisao.png" width="15" />&nbsp; - &nbsp; Pend. Revisão</p>
+                                <p><img src="~/Images/Legendas/legenda_pen_aprovacaopng.png" width="15" />&nbsp; - &nbsp; Pend. Aprovação</p>
+                                <p><img src="~/Images/Legendas/legenda_aprovado.png" width="15" />&nbsp; - &nbsp; Pend. Aprovado</p>
+                                <p><img src="~/Images/Legendas/legenda_pago.png" width="15" />&nbsp; - &nbsp; Pgto. realizado</p>
+
+                            </div>
+                        </div>
+                    </th>
+                    <th>
+                        @Html.DisplayName("Solicitante:")
+                    </th>
+
+                    <th>
+                        @Html.DisplayName("Motivo da Viagem:")
+                    </th>                   
+
+                    <th>
+                        @Html.DisplayName("Adiant:")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Total:")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Devolução:")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Aprovador:")
+                    </th>
+
+                    <th>
+                        @Html.DisplayName("Saída:")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Retorno:")
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.EditorFor(modelItem => item.Situacao, new { htmlAttributes = new { @class = "form-control col-md-1 Situacao", @disabled = "disabled", @id = "Situacao_" + item.RelatorioId + "", @title = "Relatório: " + item.Situacao + "" } })
+                            @{  relatid.Add(item.RelatorioId);}
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Motivo)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.adiantamento.AdiantamentoValor)
+                        </td>
+                        <td>
+                            @Html.Action("TotalDespesas", "Despesa", new { id = item.RelatorioId })
+                        </td>
+                        <td id="Devolucao_@item.RelatorioId">
+                            @Html.Action("TotalDevolucao", "Relatorio", new { id = item.RelatorioId })
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.aprovador.ArpovName)
+                        </td>
+
+                        <td>
+                            @DateFormatter(item.Saida)
+                        </td>
+                        <td>
+                            @DateFormatter(item.Retorno)
+                        </td>
+
+                        <td>
+                            <button title="Baixar PDF" class="btn btn-default col-md-6" onclick="location.href ='@Url.Action("UserReport", "Relatorio", new { id=@item.RelatorioId})'"><i class="glyphicon glyphicon-download-alt"></i></button>
+                            <button title="visualizar" class="btn btn-default col-md-6" onclick="location.href ='@Url.Action("ViewAprov", "Relatorio", new { id=@item.RelatorioId})'"><i class="fa fa-external-link"></i></button>
+ 
+                        </td>
+                    </tr>
+                                }
+
+            </table>
+
+        </div>
+    </div>
+
+</div>
+<!--MODAL<div class="loading" id="loading">Carregando..&#8230;</div>-->
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="MeuModal">
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/UserRelatorio.js"></script>
+    <script src="~/Scripts/Interface/UserPadraoInter.js"></script>
+    <script type="text/javascript">
+    @foreach (var d in relatid)
+    {
+        <text>
+        var sit = "#Situacao_" + @d;
+        var dev = "#Devolucao_" + @d;
+
+        situacao(sit);
+        devolucao(dev)
+        </text>
+    }
+
+    </script>
+
+}
+
+
+
+
+
+
+
+
+
+

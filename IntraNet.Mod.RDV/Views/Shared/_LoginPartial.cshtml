@@ -1,0 +1,63 @@
+﻿@using System.IdentityModel.Claims
+@using System.Security.Claims
+@using IntraNet.Data.Context
+@using Microsoft.AspNet.Identity
+
+@if (Request.IsAuthenticated)
+{
+    <!-- USUARIO COM COMUM -->
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div>
+            <ul class="nav navbar-nav navbar-right login">
+                <li>
+                    @Html.ActionLink("User:" + User.Identity.GetUserName() + "", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                </li>
+                @if (User.IsInRole("Admin"))
+                {
+                    <li class="user">
+                        @Html.ActionLink("Admin", "Index", "Administrador")
+                    </li>
+                }
+                @if (User.IsInRole("Aprovador"))
+                {
+                    <li id="Aprovador" class="col-md-2 dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Aprovador <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li class="kopie"><a href='@Url.Action("Aprovador","Adiantamento")'>Adiantamento</a></li>
+                            <li><a href='@Url.Action("Aprovador","Relatorio")'>Relatórios</a></li>
+                        </ul>
+                    </li>
+                }
+                @if (User.IsInRole("Financeiro"))
+                {
+                    <li id="Aprovador" class="col-md-2 dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Financeiro<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li class="kopie"><a href='@Url.Action("Financeiro","Adiantamento")'>Adiantamento</a></li>
+                            <li><a href='@Url.Action("Financeiro", "Relatorio")'>Relatórios</a></li>
+                        </ul>
+                    </li>
+                }
+                @if (User.IsInRole("Moderador"))
+                {
+                    <li class="user">
+                        @Html.ActionLink("Moderador", "Moderador", "Relatorio")
+                    </li>
+                }
+                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+            </ul>
+
+        </div>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@*Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}
+

@@ -1,0 +1,59 @@
+﻿@model IntraNet.Domain.Entities.RateioItem
+
+@{
+    ViewBag.Title = "Details";
+    Layout = null;
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RateioItem</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.relatorio.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.relatorio.UserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.solicitaempresa.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.solicitaempresa.UserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SolicitanteCC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SolicitanteCC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmpCC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmpCC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Classe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Classe)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RateioItemId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

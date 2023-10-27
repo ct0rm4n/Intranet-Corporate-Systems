@@ -1,0 +1,130 @@
+﻿@model IntraNet.Mod.SGR.Models.ViewModel.CreateDemandaViewModel
+@{
+    Layout = null;
+}
+<div>
+    @using (Ajax.BeginForm("Create", "Despesas", new AjaxOptions { OnBegin = "", OnFailure = "" }, new { id = "Create" }))
+    {
+
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
+        <h6><i class="fa fa-bookmark-o"></i>&nbsp;Assunto&nbsp;<i class="fa fa-caret-right"></i>&nbsp;@Html.DropDownList("AssuntoId", null, htmlAttributes: new { @class = "", @disabled = "disabled" })&nbsp;<i class="fa fa-thumb-tack"></i>&nbsp;Item&nbsp;<i class="fa fa-caret-right"></i>&nbsp;@Html.DropDownList("ItemAssuntoId", null, htmlAttributes: new { @class = "" })&nbsp;</h6>
+        <br/>
+        <h4><i class="fa fa-caret-right"></i>&nbsp;<i class="fa fa-lg fa-fw fa-calendar-plus-o">&nbsp;</i>Atribuir Demandada</h4>
+        <hr/>
+        <div class="form-horizontal">
+            <div>
+                <div id="result"></div>
+                <div class="row col-lg-12" align="left" style="display:none">
+                    <div>
+                        @Html.Editor("ReuniaoId", new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.ReuniaoId_ } })
+                    </div>
+                    <div class="col-lg-4">
+                        @Html.LabelFor(model => model.Situacao, "Situação:", htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-12">
+                            @Html.DropDownList("Situacao", null, htmlAttributes: new { @class = "form-control" })
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4">
+                        @Html.Label("Assuto:", htmlAttributes: new { @class = "col-md-3" })
+                        <div class="col-md-12">
+                            @Html.DropDownList("AssuntoId", null, htmlAttributes: new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        @Html.Label("Item:", htmlAttributes: new { @class = "col-md-3" })
+                        <div class="col-md-12">
+                            @Html.DropDownList("ItemAssuntoId", null, htmlAttributes: new { @class = "form-control" })
+                        </div>
+                    </div>
+
+
+                </div>
+                <div align="left" class="col-lg-12 row">
+                    <div class="col-lg-4">
+                        @Html.LabelFor(model => model.Oque, "O que?", htmlAttributes: new { @class = "col-md-4" })
+                        <div class="col-md-12">
+                            @Html.TextAreaFor(model => model.Oque, htmlAttributes: new { @class = "form-control", rows = 3,style="width:400px" })
+                        </div>
+
+                    </div>
+                    
+                    <div class="col-lg-4">
+                        @Html.LabelFor(model => model.Como, "Como?", htmlAttributes: new { @class = "col-md-3" })
+                        <div class="col-md-12">
+                            @Html.TextAreaFor(model => model.Como, htmlAttributes: new { @class = "form-control", rows = 3, style = "width:400px" })
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4">
+                        @Html.Label("Porque?", htmlAttributes: new { @class = "col-md-3" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Porque, new { htmlAttributes = new { @class = "form-control", rows = 3, style = "width:400px" } })
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div align="left" class="col-lg-12 row">
+                    <div class="col-lg-4">
+                        @Html.Label("Onde?", htmlAttributes: new { @class = "col-md-3" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Onde, new { htmlAttributes = new { @class = "form-control" ,style="width: 400px"} })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.Label("Quanto?", htmlAttributes: new { @class = "col-md-3" })
+                        <div class="col-lg-12">
+                            @Html.EditorFor(model => model.Quanto, new { htmlAttributes = new { @class = "form-control", style = "width: 400px" } })
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        @Html.Label("Até Quando?", htmlAttributes: new { @class = "col-md-7" })
+                        <div class="col-lg-12">
+                            @Html.EditorFor(model => model.Quando, new { htmlAttributes = new { @class = "form-control"} })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 row" style="width: 1000px">
+                    <div class="col-md-3" style = "width: 400px">
+                        @Html.Label("Quem?", htmlAttributes: new { @class = "col-md-4" })
+                        <div class="col-lg-12  row">
+                            @Html.DropDownList("Quem", null, htmlAttributes: new { @class = "form-control", style = "width: 300px" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 row" style = "width: 600px">
+
+                        @Html.Label("Demandados?", htmlAttributes: new { @class = "col-md-6" })
+                        <div class="col-lg-12 row">
+                            @Html.ListBox("Demandado", null, htmlAttributes: new { @class = "form-control", style = "width: 300px" })
+                        </div>
+                    </div>
+
+                    <script src="~/Scripts/Interface/DemandasInter.js"></script>
+                </div>
+            </div>
+        </div>
+
+    }
+    <hr />
+    <div class="row col-lg-12" align="right">
+        <button class="btn btn-default btnReuniao" onclick="InserirDemanda()">
+            <i class="fa fa-lg fa-fw fa-floppy-o"></i>&nbsp; Salvar
+        </button>
+        
+        <button class="btn btn-default btnReuniao" onclick="$('#myModal').modal('hide');">
+            <i class="fa fa-lg fa-fw fa-ban"></i>&nbsp; Cancelar
+        </button>
+    </div>
+
+
+</div>
+@section scripts{
+
+    @Scripts.Render("~/bundles/jqueryval")
+}

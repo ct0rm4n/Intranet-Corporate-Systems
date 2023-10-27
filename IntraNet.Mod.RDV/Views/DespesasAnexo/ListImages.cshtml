@@ -1,0 +1,29 @@
+﻿@model List<IntraNet.Mod.RDV.Models.ViewModel.DespesaAnexoViewModel>
+@{
+    Layout = null;
+}
+<div id="demo" class="carousel slide" data-ride="carousel">    
+    <ul class="carousel-indicators">
+        <li data-target="#demo" data-slide-to="0" class="active"></li>
+        <li data-target="#demo" data-slide-to="1"></li>
+        <li data-target="#demo" data-slide-to="2"></li>
+    </ul>
+    <div class="carousel-inner" role="listbox">
+        @{int i = 0;}
+        @foreach (var item in Model)
+        {
+                i++;
+                var active = i == 1 ? "active" : "";
+                <div class="carousel-item @active">
+                    <img src="@item.ImagePath" alt="" width="350">
+                </div>
+        }
+    </div>
+    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#demo" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </a>
+
+</div>  

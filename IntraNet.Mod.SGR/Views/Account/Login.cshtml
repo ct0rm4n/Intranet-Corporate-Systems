@@ -1,0 +1,80 @@
+﻿@using IntraNet.Mod.RDV.Models
+@using IntraNet.Mod.RDV.Models.Identity
+@model IntraNet.Mod.RDV.Models.Identity.LoginViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div  class="container body-content" style="padding-top: 1%;" aling="center">
+    <div class="col-lg-4"></div>
+    <div class="col-md-4">
+        <section id="loginForm">
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <h4 align="center">Sistema de gerenciamento de reuniões</h4>
+                <hr />
+                <img src="~/Images/meeting.png" width="95%" />
+                <br/>
+                <div align="center"><label>Utilize sua conta interna Vamtec para login.</label></div>
+                <br/>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group row" align="center">
+                    <div align="left">
+                        <div class="col-lg-1" align="center">
+                            <i class="fa fa-user-circle fa-2x">&nbsp;</i>
+                        </div>
+                        <div class="col-lg-2" align="right">
+                            @Html.LabelFor(m => m.UserName, "Usuário:", new { @class = "control-label" })
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "Usuário padrão do Microsiga" })
+                    </div>
+                </div>
+                <div class="form-group row" align="center">
+                    <div align="left">
+                        <div class="col-lg-1" align="center">
+                            <i class="fa fa-lock fa-2x">&nbsp;</i>
+                        </div>
+                        <div class="col-lg-2" align="right">
+                            @Html.LabelFor(m => m.Password, "Senha:", new { @class = "control-label" })
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                            @Html.LabelFor(m => m.RememberMe)
+                        </div>
+                    </div>
+                    <div class="col-md-offset-2 col-md-10">
+                        <p>
+                            @Html.ActionLink("Esqueceu sua senha?", "ForgotPassword")
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Login" class="btn btn-default" />
+                    </div>
+                </div>
+                @*
+                    <p>
+                        @Html.ActionLink("Registrar uma nova conta?", "Register")
+                    </p>
+                *@
+                
+            }
+        </section>
+    </div>
+    <div class="col-lg-4"></div>
+</div>
+@*@section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@

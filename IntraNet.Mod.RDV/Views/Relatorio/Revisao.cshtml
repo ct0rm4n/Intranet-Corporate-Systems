@@ -1,0 +1,49 @@
+﻿@model IntraNet.Domain.Entities.Relatorio
+
+@{
+    ViewBag.Title = "Revisao";
+    Layout = null;
+}
+
+<h2><i class="glyphicon glyphicon-envelope">&nbsp;</i>Solicitar Revisão:&nbsp;<i class="glyphicon glyphicon-warning-sign"></i></h2>
+
+<div class="row">
+    <div class="form-group">
+        <div class="col-lg-10" align="center">
+            <div class="panel panel-primary" style="width: 100%">
+                <div class="panel-heading">
+                    <h1 align="center" class="panel-title row">
+                        <label class="col-lg-10">
+                            &nbsp;Aprovador - Solictar Revisão de Relatório
+                        </label>
+                    </h1>
+                    
+                </div>
+                
+                <div class="panel-body">
+                    <p>Informe ao Usuário sobre a necessidade de revisar seu relatório, especifique quais alteraçoes são necessarias.</p>
+                    <hr/>
+                    <div class="col-lg-6">
+                        @Html.Label("Solicitar Revisão:")
+                        @Html.TextArea("Mensagem", new {@class = "form-control", @style = "width: 100%", rows = 8, placeholder = "Descreva os motivos para alteração do relatório"})
+
+                    </div>
+
+                    <div class="col-lg-4">
+                        <br/>
+                        <button onclick="Enviar()" class="btn btn-default">Solicitar Revisao ao Usuário&nbsp; <i class="glyphicon glyphicon-envelope">&nbsp;</i></button>
+
+                        <ul>
+                            <li>Usuário responsavel pelo relatório será notificado via email</li>
+
+                        </ul>
+                        <p>Obs: Após aprovação o mesmo será encaminhado ao setor financeiro </p>
+                    </div>
+
+                </div>
+                
+                </div>
+            </div>
+
+    </div>
+</div>

@@ -1,0 +1,146 @@
+﻿@model IEnumerable<IntraNet.Domain.Entities.Relatorio>
+
+@{
+    ViewBag.Title = "Financeiro";
+    List<int> relatid = new List<int>();
+}
+@helper DateFormatter(object date)
+{
+var shortDateLocalFormat = "";
+    if (date != null)
+    {
+        shortDateLocalFormat = ((DateTime)date).ToString("d/M/yyyy");
+    }
+
+    @shortDateLocalFormat
+}
+<h2><img src="~/Images/relat_icon.png" width="8%" />&nbsp; Financeiro - Relatórios</h2>
+
+
+
+
+<div class="panel panel-primary" style="width: 100%">
+
+    <div class="panel-heading">
+
+        <h1 align="center" class="panel-title row">
+
+
+            <label class="col-lg-10">
+
+                &nbsp;Controle - Relatorios por Usuário/Empresa
+            </label>
+        </h1>
+        <div align="right">
+            <button class="btn btn-default" onclick="location.href ='@Url.Action("Create", "Relatorio")'" disabled="disabled">Criar relatorio<i class="glyphicon glyphicon-ok"></i></button>
+        </div>
+    </div>
+
+    <div class="panel-body">
+
+        <div align="right">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayName("Situação:")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Motivo:")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Solicitante:")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Observações:")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Aprovador:")
+                    </th>
+
+                    <th>
+                        @Html.DisplayName("Saída:")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Retorno:")
+                    </th>
+
+                    <th>
+                        @Html.DisplayName("Adiantamento:")
+                    </th>
+                    
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+
+
+
+                    <tr>
+                        <td>
+                            @Html.EditorFor(modelItem => item.Situacao, new { htmlAttributes = new { @class = "form-control col-md-1 Situacao", @disabled = "disabled", @id = "Situacao_" + item.RelatorioId + "", @title = "Relatório: " + item.Situacao + "" } })
+                            @{  relatid.Add(item.RelatorioId);}
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Motivo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Observacoes)
+                        </td>
+                        <td>
+
+                            @Html.DisplayFor(modelItem => item.aprovador.ArpovName)
+                        </td>
+
+                        <td>
+                            @DateFormatter(item.Saida)
+                        </td>
+                        <td>
+                            @DateFormatter(item.Retorno)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AdiantamentoValor)
+                        </td>
+                       
+
+                        <td>
+              
+                            <button class="btn btn-default" onclick="location.href ='@Url.Action("UserReport", "Relatorio", new { id=@item.RelatorioId})'">Download &nbsp;<i class="glyphicon glyphicon-download-alt"></i></button>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+
+        </div>
+    </div>
+
+</div>
+@section Scripts {
+    <script src="~/Scripts/UserRelatorio.js"></script>
+    <script type="text/javascript">
+    @foreach (var d in relatid)
+    {
+        <text>
+        var sit = "#Situacao_" + @d;
+        situacao(sit);
+        </text>
+    }
+
+    </script>
+
+}
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,134 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@if (User.IsInRole("Admin"))
+{
+    @Html.Partial("_AdmMenuPartialView")
+}
+<h3 align="center"><i class="glyphicon glyphicon-globe">&nbsp;</i>Estatisticas do Usuário</h3>
+
+<hr />
+<br/>
+<div class="body-content" style="padding-left: 12%;">
+    <div class="row">
+        <div class="col-lg-4 col-md-6">
+            <div class="panel panel-default" id="PanelTotal">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <h1><span class="glyphicon glyphicon-list-alt"></span></h1>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge"><b>@ViewBag.Total</b></div>
+                            <div>Relatórios</div>
+                        </div>
+                    </div>
+                </div>
+                <a href='@Url.Action("Index","Relatorio")'>
+                    <div class="panel-footer">
+                        <span class="pull-left">Ver mais</span>
+                        <span class="pull-right"><i class="glyphicon glyphicon-circle-arrow-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="panel panel-green" id="PanelPendente">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <h1><i class="glyphicon glyphicon-time"></i></h1>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge"><b>@ViewBag.Pendente</b></div>
+                            <div>Pendentes!</div>
+                        </div>
+                    </div>
+                </div>
+                <a href='@Url.Action("Index","Relatorio")'>
+                    <div class="panel-footer">
+                        <span class="pull-left">Ver mais</span>
+                        <span class="pull-right"><i class="glyphicon glyphicon-circle-arrow-right"></i></span>
+
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+            <div class="panel panel-red" id="PanelAprovado">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <h1><i class="glyphicon glyphicon-ok"></i></h1>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge"><b>@ViewBag.Aprovado</b></div>
+                            <div>Aprovados!</div>
+                        </div>
+                    </div>
+                </div>
+                <a href='@Url.Action("Index","Relatorio")'>
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row" >
+        <div class="col-lg-9">
+            <div class="panel panel-default" id="PanelDash">
+                <div class="panel-heading">
+                    <div class="row col-lg-12">
+                        <h4 class="col-lg-6"><i class="glyphicon glyphicon-stats">&nbsp;</i>Gasto anual em viagens</h4><h4 class="col-lg-6" align="left"><a><i id="iconright" class="glyphicon glyphicon-collapse-up"></i></a></h4>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <img src="@Url.Action("Grafico", "Relatorio")" alt="Linhas" id="Barras">
+                </div>
+                <div class="panel-footer">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="panel panel-default" id="NotificaDash">
+                <div class="panel-heading">
+                    <div class="row col-lg-12">
+                        <h5 class="col-lg-12"><i class="glyphicon glyphicon-envelope">&nbsp;</i>Notificações</h5>
+                    </div>
+                </div>
+                <div class="panel-body">
+
+                </div>
+                <div class="panel-footer">
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>
+<!--MODAL-->
+<div class="loading" id="loading">Carregando..&#8230;</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="MeuModal">
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div> 
+      
+@section Scripts {
+    <script src="~/Scripts/Interface/UserPadraoInter.js"></script>
+<script src="~/Scripts/Interface/RelatorioInter.js"></script>
+<script src="~/Scripts/Repositories/UserPadraoRepositorie.js"></script>
+}

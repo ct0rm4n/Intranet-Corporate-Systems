@@ -1,0 +1,209 @@
+﻿@model IntraNet.Mod.RDV.Models.Identity.EditUserViewModel
+
+@{
+    ViewBag.Title = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("_AdmMenuPartialView")
+
+<div class="container body-content" style="padding-left: 15%">
+    
+    <hr />
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="col-md-12"><h4><i class="fa fa-lg fa-fw fa-pencil">&nbsp;</i>Editar usuário.</h4></div>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, "Matricula:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("Matricula", null, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, "Nome:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.PhoneNumber, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.PhoneNumber, null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PhoneNumber)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Endereco, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Endereco,  new { @class = "form-control", rows = 3 })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Local, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.Local, null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Local)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Setor, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.Setor, null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Setor)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Funções:", new { @class = "control-label col-md-2" })
+            <span class="col-md-10">
+                @foreach (var item in Model.RolesList)
+                {
+                    <input type="checkbox" name="SelectedRole" value="@item.Value" checked="@item.Selected" class="checkbox-inline" />
+                    @Html.Label(item.Value, new { @class = "control-label" })
+                }
+            </span>
+        </div>
+        
+        <hr />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" value="Salvar" class="btn btn-default" align="right">&nbsp;<i class="fa fa-lg fa-fw fa-floppy-o"></i>&nbsp;Salvar</button><button type="submit" value="Salvar" class="btn btn-default" align="right">&nbsp;<i class="fa fa-ban"></i>&nbsp;Cancelar</button>
+            </div>
+        </div>
+
+
+        <hr />
+
+
+    </div>
+    }
+    <div class="form-group">
+        @Html.Label("Permissão:", new { @class = "control-label col-md-2" })
+        <span class="col-md-10">
+            <a href="@Url.Action("SetUserClaim","ClaimsAdmin", new { id = Model.Id })">Adicionar Claim</a>
+        </span>
+        <div>
+            @if (ViewBag.Claims.Count == 0)
+            {
+                <hr />
+                <p>Usuário não possui nenhum Claim.</p>
+            }
+            else
+            {
+                <table class="table">
+                    <tr class="table-bordered">
+                        <td>
+                            <b>Nome da Claim</b>
+                        </td>
+                        <td>
+                            <b>Valor da Claim</b>
+                        </td>
+                    </tr>
+
+                    @foreach (var item in ViewBag.Claims)
+                    {
+                        <tr>
+                            <td>
+                                @item.Type
+                            </td>
+                            <td>
+                                @item.Value
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="container">
+            <div class="panel panel-primary" style="width: 100%">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-lg-10">
+                            <h4 align="left">
+                                <i class="glyphicon glyphicon-cog">&nbsp;</i><b>Solicitante/Empresas</b>
+                            </h4>
+                        </div>
+                        <div class="col-lg-2">
+                            <button id="btnSolicEmpAdd" class="btn btn-default">Novo &nbsp;<i class="glyphicon glyphicon-plus"></i></button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="panel-body col-md-12">
+                    <div>
+                        <fieldset id="SolicEmpAdd" runat="server">
+                            @Html.Action("Create", "SolicitaEmpresas")
+                        </fieldset>
+                        <div>
+                            @Html.Action("index", "SolicitaEmpresas", new {id = Model.Id})
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="container">
+            <div class="panel panel-primary" style="width: 100%">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-lg-10">
+                            <h4 align="left">
+                                <i class="glyphicon glyphicon-subtitles">&nbsp;</i><b>C.Custos Disponiveis por empresa</b>
+                            </h4>
+                        </div>
+                        <div class="col-lg-2">
+                            <button id="btnSolicCCAdd" class="btn btn-default">Novo &nbsp;<i class="glyphicon glyphicon-plus"></i></button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="panel-body col-md-12">
+                    <div>
+                        <fieldset id="SolicCCAdd" runat="server">
+                            @Html.Action("Create", "SolicitaCusto")
+                        </fieldset>
+                        <div>
+                            @Html.Action("index", "SolicitaCusto", new { id = Model.Id })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="MeuModal">
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+    <script src="~/Scripts/AdminMaster.js"></script>
+}

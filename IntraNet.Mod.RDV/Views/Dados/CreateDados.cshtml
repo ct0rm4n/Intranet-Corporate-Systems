@@ -1,0 +1,70 @@
+﻿@model IntraNet.Mod.RDV.Models.ViewModel.DadosBancariosViewModel
+
+@{ 
+    Layout = null;
+}
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4><i class="glyphicon glyphicon-pencil">&nbsp; </i>Cadastrar conta para recebimento</h4>
+        <div class="alert alert-danger" id="Alert">
+
+        </div>
+        <hr />
+        
+        <div class="form-group">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.UserId, new { @class = "form-control", @Value = ViewBag.UserId, @disabled = "disabled" })
+            <div class="row col-lg-12">
+                <div class="col-lg-5">
+                    @Html.LabelFor(model => model.Banco, "Banco:", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                        @Html.DropDownList("Banco", null, htmlAttributes: new { @class = "form-control", @id = "Banco" })
+                        @Html.ValidationMessageFor(model => model.Banco, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-lg-7" >
+                    @Html.LabelFor(model => model.Agencia, "Agência:", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-8">
+                        <div class="col-lg-8">
+                            @Html.EditorFor(model => model.Agencia, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Agencia, "", new { @class = "text-danger" })
+                        </div>                        
+                    </div>                    
+                </div>
+            </div><br />
+            
+            <div class="row col-lg-12">
+                <div class="col-lg-5">
+                    @Html.LabelFor(model => model.ContaCorrente, "Conta:", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.ContaCorrente, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ContaCorrente, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-lg-4">
+                        @Html.EditorFor(model => model.Dv, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Dv, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    @Html.LabelFor(model => model.Cpf, "CPF:", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Cpf, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Cpf, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            
+        </div><br />       
+
+        <div class="form-group" align="right">
+            <div class="col-md-12">
+                <button type="button" onclick="CadastrarController()" class="btn btn-default" >
+                    <i class="glyphicon glyphicon-plus">Salvar</i>
+                </button>
+            </div>
+        </div>
+    </div>
+}

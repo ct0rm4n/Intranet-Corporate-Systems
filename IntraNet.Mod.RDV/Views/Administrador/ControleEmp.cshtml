@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "ControleEmp";
+}
+@Html.Partial("_AdmMenuPartialView")
+
+<div class="container body-content" style="padding-left: 15%">
+    <h2><i class="glyphicon glyphicon-wrench">&nbsp;</i>Controle - Centro de Custo</h2>
+    <hr />
+    <h5>Faça o controle dos Centro de Custo por Empresa:</h5>
+    <hr />
+    <div class="row" align="right">
+        <!--BOTÕES-->
+        <button class="btn btn-default" id="btnAddCCusto" onclick="btnAddCCusto()"><i class="glyphicon glyphicon-plus"></i> Novo C.Custo</button>
+    </div>
+    <div id="divAdd" runat="server">
+        @*Html.Action("CreateEmpCC", "EmpCCusto", new { ID = Model.EmpresaId })*@
+        @Html.Action("CreateEmpCC", "EmpCCusto")
+    </div>
+    <div class="container" align="right">
+        <table id="jqGridEmpresaCC"></table>
+        <div id="jqControlsEmpresaCC"></div>
+    </div>
+</div>
+<!--MEU MODALA-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="MeuModal">
+                </div>
+
+            </div>
+            <hr />
+            <div align="right">
+                <input type="button" value="Proximo" class="btn btn-default btnCadEmpCC" onclick="Proximo()" id="Proximo" disabled />
+                <input name="btnFinaliza" type="button" value="Finalizar" class="btn btn-default btnFinaliza" id="Finalizar" onclick="Finaliza()" disabled />
+            </div>
+        </div>
+
+    </div>
+</div>
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/jquery.jqGrid/ui.jqgrid.css" rel="stylesheet" />
+    <script src="~/Scripts/i18n/grid.locale-en.js"></script>
+    <script src="~/Scripts/jquery.jqGrid.min.js"></script>
+    <script src="~/Scripts/AdminMaster.js"></script>
+    <script src="~/Scripts/AdminGrid.js"></script>
+    <script src="~/Scripts/AdminCCusto.js"></script>
+}

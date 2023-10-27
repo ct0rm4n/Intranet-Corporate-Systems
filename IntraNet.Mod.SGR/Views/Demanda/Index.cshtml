@@ -1,0 +1,130 @@
+﻿@model IEnumerable<IntraNet.Mod.SGR.Models.ViewModel.DemandaViewModel>
+
+@{
+    List<int> demandasid = new List<int>();
+    Layout = null;
+    if (Model.Count() > 0)
+    {
+        <table >
+            <tr>
+                <th>
+                    &nbsp;<i class='glyphicon glyphicon-info-sign'></i>&nbsp;
+                </th>
+                <th>
+                    @Html.Label("Sit:")
+                </th>
+                <th>
+                    @Html.Label("O que?")
+                </th>
+                <th>
+                    @Html.Label("Porquê?")&nbsp;@Html.Label("Como?")
+                </th>
+
+                <th>
+                    @Html.Label("Onde?")&nbsp;@Html.Label("Quanto?")
+                </th>
+
+                <th>
+                    <i class="fa fa-lg fa-fw fa-calendar">&nbsp;</i>@Html.Label("Quando?")
+                </th>
+                <th>
+                    <i class="fa fa-users">&nbsp;</i>@Html.Label("Demandados?")
+                </th>
+                
+                <th>
+                    <button title="Nova Demanda 6w2h" class="btn btn-default btnReuniao" onclick="">&nbsp;<i class="fa fa-calendar-plus-o"></i>&nbsp;Atribuir</button>
+                </th>
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+             <tbody>
+                <tr style="border-bottom: 0px solid black;border-top: 2px solid black;border-left: 2px solid black;border-right: 2px solid black;">
+                    <td>
+                        <span class="fa fa-fw fa-plus" title="Ver checklist de ações da demanda"></span>
+                    </td>
+                    <td>
+                        @Html.EditorFor(modelItem => item.Situacao, new { htmlAttributes = new { @class = "form-control col-md-1 Situacao", @disabled = "disabled", @id = "Situacao_" + item.DemandaId + "", @title = "Demanda: " + item.Situacao + "" } })
+                        @{ demandasid.Add(item.DemandaId);}
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Oque)
+                    </td>
+                    <td>
+                        <b>Porque:</b>@Html.DisplayFor(modelItem => item.Porque)<br />
+                        <b>Como:</b>@Html.DisplayFor(modelItem => item.Como)
+                    </td>
+
+                    <td>
+                        <b>Onde:</b>@Html.DisplayFor(modelItem => item.Onde)<br />
+                        <b>Quanto:</b>@Html.DisplayFor(modelItem => item.Quanto)
+                    </td>
+                    <td>
+                        @Html.EditorFor(modelItem => item.Quando, new { htmlAttributes = new { @disabled = "disabled", @style = "width: 129px; max-width: 129px;" } })
+                    </td>
+
+                    <td>
+                        <b>Demandador:</b>@Html.DisplayFor(modelItem => item.Quem)<br />
+                        <b>Demandados:</b><br />
+                        <select id="Demandado" class="col-lg-12 row form-control Demandados_@item.DemandaId" multiple="" disabled="disabled">
+                            @if (item.Demandado.Count() > 0 && item.Demandado != null)
+                            {
+                                foreach (var Demandado in item.Demandado)
+                                {
+
+                                    <option value=@Demandado.UserId selected>@Demandado.UserId</option>
+
+                                }
+                            }
+                        </select>
+                    </td>
+                    <td>
+                        <button title="Baixar PDF" class="btn btn-default btnReuniao" onclick="location.href ='@Url.Action("UserReport", "Demanda", new { id=@item.DemandaId})'">&nbsp;<i class="glyphicon glyphicon-download-alt"></i>&nbsp;</button>
+                        <button title="Alterar" class="btn btn-default btnReuniao" onclick='EditarDemanda("@item.DemandaId")'>&nbsp;<i class="fa fa-fw fa-pencil">&nbsp;</i></button>
+                        <button title="Excluir" class="btn btn-default btnReuniao" onclick='RemoverDemanda("@item.DemandaId")'>&nbsp;<i class="fa fa-fw fa-trash-o">&nbsp;</i></button>
+                        <button title="Alterar" class="btn btn-default btnReuniao" onclick='RemoverDemanda("@item.DemandaId")'>&nbsp;<i class="fa fa-paperclip">&nbsp;</i></button>
+                    </td>
+
+                </tr>
+
+                <tr style="border-bottom: 2px solid black;border-top: 0px none black;border-left:2px solid black; border-right: 2px solid black;">
+                    <td  colspan="9" class="innerTable">
+                        @Html.Action("Index", "AcaoDemanda", new { id = item.DemandaId })
+                    </td>
+                    
+                </tr>
+             </tbody>
+            }
+
+        </table>
+        <script src="~/Scripts/Interface/UserInter.js"></script>
+        <script type="text/javascript">
+
+            @foreach (var d in demandasid)
+            {
+                <text>
+            var sit = "#Situacao_" + @d;
+            var dem = ".Demandados_" + @d;
+            console.log("PovoaAutocompletarDemandados..")
+            situacao(sit)
+            ListaDemandaDemandao(dem);
+                </text>
+            }
+
+        </script>
+    }
+    else
+    {
+        <div class="row col-lg-8 alert alert-info"><strong><i class="fa fa-info-circle">&nbsp;</i>Informativo -</strong>O item não possui registros, faça o cadastro dos problemas a serem resolvidos.</div>
+        <br />
+        <div class="row col-lg-12" align="right">
+            <button title="Atribuir Demanda" class="btn btn-default" onclick="InsereDemanda($('#ItemAssuntoId').val())">
+                <i class="fa fa-lg fa-fw fa-wrench"></i>&nbsp; Atribuir
+            </button>
+            <button class="btn btn-default" onclick="$('#myModal').modal('hide');">
+                <i class="glyphicon glyphicon-remove"></i>&nbsp; Cancelar
+            </button>
+        </div>
+    }
+}

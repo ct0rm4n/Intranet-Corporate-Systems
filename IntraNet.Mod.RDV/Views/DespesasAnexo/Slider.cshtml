@@ -1,0 +1,39 @@
+﻿@{
+    Layout = null;
+    var idcont = "#carousel";
+    var idcarousel = "carousel";
+}
+<div class="carousel slide" data-ride="carousel">
+    <div id="@idcarousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            @{ int cont = 0;}
+            @foreach (var item in ViewBag.Despesas)
+            {
+                cont++;
+                <li data-target="@idcarousel" data-slide-to="cont" class="active"></li>
+            }
+        </ol>
+        <div class="carousel-inner" role="listbox" id="carosel">
+            @{int i = 0;}
+            @foreach (var item in ViewBag.Despesas)
+            {
+                i++;
+                var active = i == 1 ? "item active" : "item";
+                var slide = "slide" + i;
+                <div class="@active" id="@slide">
+                    <img src="@item.ImagePath.Replace("~", "")" alt="Entrar em contato" style="height: 290px; min-width: 360px; width: auto" align="left" />
+                    <div class="carousel-caption">
+                      
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+    <a class="carousel-control left" href="@idcont" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="carousel-control right" href="@idcont" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+</div>

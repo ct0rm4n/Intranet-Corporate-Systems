@@ -1,0 +1,200 @@
+﻿@model IntraNet.Mod.RDV.Models.ViewModel.RelatorioViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+@using (Html.BeginForm("Create", "Relatorio", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div>
+        <div class="form-horizontal row col-lg-10">
+            <h3 class="col-lg-10" align="center">
+                <img src="~/Images/relat_icon.png" width="4%" />
+                Relatório de Reembolso de Despesas
+            </h3>
+            <div class="col-md-2" align="right">
+                @Html.Label("Situação:", htmlAttributes: new { @class = "control-label col-md-2" })@Html.EditorFor(model => model.Situacao, new { htmlAttributes = new { @class = "form-control col-md-2", @disabled = "disabled" ,@Value="Incompleto"} })
+            </div>
+            <br/>
+        </div>
+        <br/><br /><br />
+        <hr/> 
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div id="result">
+        </div>
+        <!---->
+        <div class="row col-lg-12">
+            <div class="col-md-8">
+                
+                @Html.HiddenFor(model => model.UserName,  new { @class = "form-control", @Value = ViewBag.UserName })
+                @Html.HiddenFor(model => model.UserId,  new { @class = "form-control", @Value = ViewBag.UserId })
+                <div class="row">
+                    @Html.Label("Empresa:", htmlAttributes: new { @class = "control-label col-md-2" })
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.EmpresaId, null, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.Label("Motivo da Viagem:", htmlAttributes: new { @class = "control-label col-md-6" })
+                </div>
+                <div class="row col-md-12" style="width: 100%;">
+                    @Html.TextAreaFor(model => model.Motivo, new { @class = "form-control col-md-12", rows = 3, cols = 60, style = "width: 100%; max-width: 100%;", placeholder = "Descreva os motivos para viagem" })
+                    @Html.ValidationMessageFor(model => model.Motivo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+               
+                <div class="row">
+                    @Html.Label("Saída:", htmlAttributes: new { @class = "control-label col-md-2", @type = "date" })
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">                        
+                        @Html.EditorFor(model => model.Saida, new { htmlAttributes = new { @class = "form-control"} })
+                        @Html.ValidationMessageFor(model => model.Saida, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row">
+                    <br/>&nbsp;<br />
+                </div>
+
+                <div class="row">
+                    @Html.Label("Retorno:", htmlAttributes: new { @class = "control-label col-md-2" }) 
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.Retorno, new { htmlAttributes = new { @class = "form-control", placeholder = "DD/MM/YYYY" } })
+                        @Html.ValidationMessageFor(model => model.Retorno, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <br />
+        <div class="row col-lg-12">
+            <div class="col-lg-4" align="left" style="padding-left: 0;">
+                @Html.Label("Dados Bancarios para Reembolso:", htmlAttributes: new { @class = "control-label col-md-12" })<a class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Gerenciar dados bancarios" onclick="location.href='@Url.Action("index","Dados")'"></a>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.DadosBancariosId, null, "Selecione", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DadosBancariosId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-lg-4" align="left">
+                @Html.Label("Aprovador responsavel:", htmlAttributes: new { @class = "control-label col-md-12" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.AprovadorId, null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.AprovadorId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="col-lg-4" align="right">
+                <button class="btn btn-default" onclick="CadastrarRelatController(); return false;">Prosseguir&nbsp;<i class="glyphicon glyphicon-ok"></i></button>
+            </div>
+        </div>
+        <hr />
+        <div class="col-md-12">
+            <div class="container">
+                <div class="panel panel-primary" style="width: 100%">
+                    <div class="panel-heading">
+
+                        <div class="row">
+                            <div class="col-lg-10">
+                                <h4 align="center">
+                                    <i class="glyphicon glyphicon-usd"></i><b>ESPECIFICAÇÃO DAS DESPESAS</b>
+                                </h4>
+                            </div>
+                            <div class="col-lg-2">
+                                <button onclick="CriarDesp(@ViewBag.RelatorioId)" class="btn btn-default" disabled>Novo &nbsp;<i class="glyphicon glyphicon-plus"></i></button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="panel-body col-md-12">
+                        <div>
+                            <table class="table">
+                                <tr>
+                                    <th>
+                                        @Html.DisplayName("Tipo da despesa:")
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName("Descrição/Observação:")
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName("Valor:")
+                                    </th>
+                                </tr>
+                
+                            </table>
+                            <div class="alert alert-danger" id="Alert">
+                                <h5>Antes de inserir as despesas, clique no botão prosseguir</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="form-group">
+            <div class="col-md-10" align="left">                
+                <div class="col-md-7">
+                    <div class="container">
+                        <div class="panel panel-primary" style="width: 100%">
+                            <div class="panel-heading" align="center"><h4><i class="glyphicon glyphicon-ok-sign"></i>&nbsp;<b>RESUMO DO RELATÓRIO</b></h4></div>
+                            <div class="panel-body col-md-12">
+                                <br/>
+                                <div class="row">
+
+                                    <div class="col">
+                                        @Html.Label("Adiantamento:", htmlAttributes: new {@class = "control-label col-md-5"})
+                                    </div>
+                                    <div class="col col-md-6">
+                                        @Html.EditorFor(model => model.AdiantamentoId, null, new {htmlAttributes = new {@class = "form-control Adiantamento", @id = "Adiantamento", onkeyup = "Calcular()", @disabled = "disabled"}})
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        @Html.Label("Total:", htmlAttributes: new {@class = "control-label col-md-5"})
+                                    </div>
+                                    <div class="col col-md-6">
+                                        @Html.Editor("Total", new {htmlAttributes = new {@class = "form-control", placeholder = "00.00", @disabled = "disabled", @Value = ViewBag.Total}})
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        @Html.Label("A receber:", htmlAttributes: new {@class = "control-label col-md-5"})
+                                    </div>
+                                    <div class="col col-md-6">
+                                        @Html.Editor("AReceber", new {htmlAttributes = new {@class = "form-control", placeholder = "00.00", @disabled = "disabled"}})
+                                    </div>
+                                </div>
+                                <br/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>       
+
+        </div>
+
+        <hr/>
+       
+        <div align="right">
+            <a class="btn btn-default" href="@Url.Action("exportReport","Relatorio", new { id = ViewBag.RelatorioId })" disabled>PDF &nbsp;<i class="glyphicon glyphicon-download-alt"></i></a>  <button type="submit" class="btn btn-default" onclick="SalvarEdicaoController(@ViewBag.RelatorioId)" disabled>Salvar &nbsp;<i class="glyphicon glyphicon-pencil"></i></button>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/UserRelatorio.js"></script>
+    <script src="~/Scripts/Mascaras.js"></script>
+}

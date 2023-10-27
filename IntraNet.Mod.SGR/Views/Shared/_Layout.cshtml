@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - SGR</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/autocomplete.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/all.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/css/select2.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("SGR Vamtec", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <ul class="nav navbar-nav">
+
+                    @if (User.IsInRole("Administrador"))
+                    {
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-clipboard">&nbsp;</i>Controle</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="@Url.Action("UserAdminSGR", "PainelSGR")"><i class="fa fa-users">&nbsp;</i>Usuários</a></li>
+                                <li><a href="@Url.Action("Index", "Reuniao")"><i class="fa fa-handshake-o">&nbsp;</i>Reuniões</a></li>
+                                <li><a href="@Url.Action("EmpresaAdminSGR", "PainelSGR")"><i class="fa fa-window-maximize">&nbsp;</i>Empresa</a></li>
+                                <li><a href="@Url.Action("UnidadeAdminSGR", "PainelSGR")"><i class="fa fa-window-restore">&nbsp;</i>Unidade</a></li>
+                                <li><a href="@Url.Action("SetorAdminSGR", "PainelSGR")"><i class="fa fa-briefcase">&nbsp;</i>Setor</a></li>
+                                <li><a href="@Url.Action("RoleAdminSGR", "PainelSGR")"><i class="fa fa-gavel">&nbsp;</i>Função</a></li>
+                                <li><a href="@Url.Action("ClaimAdminSGR", "PainelSGR")"><i class="fa fa-star-half-o">&nbsp;</i>Privilegio</a></li>
+                            </ul>
+                        </li>
+                    }
+
+                    <li>
+                        <a href='@Url.Action("Dash","PainelSGR")'>&nbsp;<i class="fa fa-line-chart">&nbsp;</i>Dashboard</a>
+                    </li>
+                    @if (User.IsInRole("Especial"))
+                    {
+
+                        
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-file-archive-o">&nbsp;</i>Relatórios</a>
+                            <ul class="dropdown-menu">
+                                <li><a onclick='RelatorioDemandasAcoesInter()'>&nbsp;Demandas e ações</a></li>
+                                <li><a href="@Url.Action("EmpresaAdminSGR", "PainelSGR")">&nbsp;Açoes por periodo</a></li>    
+                            </ul>
+                        </li>
+                    }
+                    <li>
+                        <a href="@Url.Action("Index", "Reuniao")"><i class="fa fa-handshake-o">&nbsp;</i>Reuniões</a>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="navbar-collapse collapse">
+
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div>
+        @RenderBody()
+        <div class="loading" id="loading">Carregando..&#8230;</div>
+        <hr />
+        <div class="container body-content">
+            <footer>
+                <br />
+                <p align="center">Copyright &copy; @DateTime.Now.Year | Vamtec Group | SGR - 6W2H </p>
+
+            </footer>
+        </div>
+
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/Interface/UserInter.js"></script>
+    <script src="~/Scripts/select2.min.js"></script>
+    <script src="~/Scripts/Interface/ReuniaoInter.js"></script>
+    <script src="~/Scripts/Interface/RelatorioInter.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

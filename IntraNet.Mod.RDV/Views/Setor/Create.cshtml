@@ -1,0 +1,50 @@
+﻿@model IntraNet.Mod.RDV.Models.ViewModel.SetorViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = null;
+}
+
+<h2><i class="glyphicon glyphicon-plus">&nbsp;</i>&nbsp;Cadastro de Novo Setor</h2>
+
+
+@using (Html.BeginForm("Create", "Setor", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <hr />
+    <h4>Formulário para Cadastro</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Nome, "Nome do Setor:", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Observacao, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Observacao, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Observacao, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="row" align="right">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-default">Salvar&nbsp;<i class="glyphicon glyphicon-ok"></i></button>
+                <button type="button" value="Salvar" id="Cancelar" class="btn btn-default" onclick="Finaliza()"> Cancelar &nbsp;<i class="glyphicon glyphicon-remove"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}

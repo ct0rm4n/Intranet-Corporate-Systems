@@ -1,0 +1,39 @@
+﻿@model IEnumerable<IntraNet.Domain.Entities.SolicitaCCusto>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.empccusto.CCustoDesc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.empccusto.CCusto)
+        </th>
+        <th>
+            @Html.DisplayName("Pertence")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.empccusto.CCustoDesc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.empccusto.CCusto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.empresa.RazaoSocial)
+        </td>
+        <td>
+
+            <button onclick="RemoverCC(@item.SolicitaCCustoId)"class="btn btn-default">Remover&nbsp;<i class="glyphicon glyphicon-remove"></i></button>
+        </td>
+    </tr>
+}
+
+</table>

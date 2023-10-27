@@ -1,0 +1,22 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace IntraNet.Security.Models
+{
+    [Table("AspNetClaims")]
+    public class Claims
+    {
+        public int Id { get; set; }
+        //public Guid Id { get; set; }
+        //[Required(AllowEmptyStrings = false, ErrorMessage = "Fornceça um nome para a Claim")]
+        [MaxLength(128, ErrorMessage = "Tamanho máximo {0} excedido")]
+        [Display(Name = "Nome da Claim")]
+        public string Name { get; set; }
+        public string Value { get; set; }
+    }
+}

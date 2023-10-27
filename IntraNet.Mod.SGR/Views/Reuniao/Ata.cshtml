@@ -1,0 +1,80 @@
+﻿@model IntraNet.Mod.SGR.Models.ViewModel.ReuniaoViewModel
+@{
+    ViewBag.Title = "Ata";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.Hidden("ReuniaoId")
+@Html.Hidden("AssuntoId")
+@Html.Hidden("DescAssunto")
+@Html.Hidden("ItemAssuntoId")
+@Html.Hidden("DescItemAssunto")
+@Html.Hidden("DemandaId")
+@Html.Hidden("Qtddemandas")
+<div class="row" align="right" style="padding-right: 0;margin-right: 0;background-color: whitesmoke; background: whitesmoke">
+
+    <div class="col-md-10">
+        <div class="col-lg-12">
+            <div class="col-lg-6" align="left">
+                <label align="left">&nbsp; <b>Reunião:</b> @Html.Label((string)ViewBag.ReuNome, new { @id = "nome", @class = "nome" })</label>&nbsp;<b>Setor:</b> @ViewBag.ReuTema &nbsp;&nbsp;&nbsp;
+                <div id="MensagemAta">
+
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+
+                <i class="fa fa-file-text-o">&nbsp;</i><b>Assuntos:</b>&nbsp;@ViewBag.AssuntosQtd,&nbsp; <i class="fa fa-thumb-tack">&nbsp;</i><b>Itens:</b>&nbsp;@ViewBag.ItensQtd, &nbsp;<i class="glyphicon-wrench">&nbsp;</i><b>Demandas:&nbsp;</b>@ViewBag.DemandasQtd
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2" align="right" style="padding-right: 0;margin-right: 0;">
+        <div align="right">
+            <button title="Configuracao" class="btn btn-default btnReuniao" onclick="location.href = '@Url.Action("UserReportDemandaPorReuniao", "ReportCrystal", new {id = @Model.ReuniaoId})'"><i class="fa fa-cogs" aria-hidden="true"></i>&nbsp;</button>
+        </div>
+    </div>
+
+</div>
+<table id="jqGridAtaAssuntosItens"></table>
+<div id="jqControlsAtaAssuntosItens"></div>
+<table id="jqGridDemanda"></table>
+<div id="jqControlsDemanda"></div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document" id="modal-ata">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="MeuModal">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+@section scripts{
+    <script>
+        
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/ui.jqgrid.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+    <script src="~/Scripts/Repositories/ReuniaoRepositorie.js"></script>
+    <script src="~/Scripts/free-jqGrid/i18n/grid.locale-pt-br.js"></script>
+    <script src="~/Scripts/free-jqGrid/jquery.jqgrid.min.js"></script>
+    <script src="~/Scripts/Interface/UserInter.js"></script>
+    <script src="~/Scripts/Interface/AssuntoInter.js"></script>
+    <script src="~/Scripts/Interface/DemandasInter.js"></script>
+    <script src="~/Scripts/Interface/ItensAssuntosInter.js"></script>
+    <script src="~/Scripts/Interface/AcaoDemandasInter.js"></script>
+    <script src="~/Scripts/Interface/ReuniaoInter.js"></script>
+    <script src="~/Scripts/Repositories/DemandaRepositorie.js"></script>
+    <script src="~/Scripts/Repositories/AssuntosRepositorie.js"></script>
+    <script src="~/Scripts/Repositories/ItensAssuntosRepositorie.js"></script>
+    <script src="~/Scripts/Repositories/LogRepositorie.js"></script>
+    <script src="~/Scripts/Repositories/AcaoDemandasRepositorie.js"></script>
+    <script src="~/Scripts/Repositories/GridRepositorie.js"></script>
+
+}

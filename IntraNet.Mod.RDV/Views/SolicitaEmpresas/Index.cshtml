@@ -1,0 +1,42 @@
+﻿@model IEnumerable<IntraNet.Domain.Entities.SolicitaEmpresa>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+<div ></div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.empresa.RazaoSocial)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.Fornecedor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Projeto)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.empresa.RazaoSocial)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Fornecedor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Projeto)
+        </td>
+        @{ var ID = item.SolicitaEmpresaId;}
+        <td>
+            <button onclick="RemoverSolicitaEmp(@ID)" class="btn btn-default">Remover&nbsp;<i class="glyphicon glyphicon-remove"></i></button>
+        </td>
+    </tr>
+}
+
+</table>

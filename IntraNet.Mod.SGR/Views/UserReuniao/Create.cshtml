@@ -1,0 +1,78 @@
+﻿@model IntraNet.Mod.SGR.Models.ViewModel.UserReuniaoViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = null;
+}
+
+@using (Html.BeginForm("Create", "UserReuniao", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <h4>Gerenciar udsuários da Reunião</h4>
+        <hr />
+        <!--@Html.ValidationSummary(true, "", new { @class = "text-danger" })-->
+        <div class="alert alert-danger" id="AlertReuniao" onload="Abrir()">
+        </div>
+        
+        <div class="form-group row">
+            @Html.HiddenFor(m => m.ReuniaoId);
+            
+            <div class="col-md-4">
+                @Html.Label("Grupos de assuntos:")
+                @Html.ListBox("UserId", null, htmlAttributes: new { @class = "form-control", size = 10,@Value=ViewBag.UserId})
+            </div>
+            <div class="col-md-2">
+                <div>
+                    <br />
+                    <button type="button" class="btn btn-default" onclick="AddMod();">
+                        <i class="glyphicon glyphicon-chevron-right"></i>
+                    </button>
+                    <button type="button" class="btn btn-default" onclick="RemoveMod();">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                    </button>
+                    <button type="button" class="btn btn-default" onclick="RemoveAllMod();">
+                        <i class="glyphicon glyphicon-backward"></i>
+                    </button>
+                    <br /><br /><br />
+                    <button type="button" class="btn btn-default" onclick="AddUser();">
+                        <i class="glyphicon glyphicon-chevron-right"></i>
+                    </button>
+                    <button type="button" class="btn btn-default" onclick="RemoveUser();">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                    </button>
+                    <button type="button" class="btn btn-default" onclick="RemoveAllUser();">
+                        <i class="glyphicon glyphicon-backward"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group row" align="center">
+                <div class="col-sm-4" align="left">
+                    @Html.Label("Moderadores:")
+                    @Html.ListBoxFor(m=>m.ListaModerador, new List<SelectListItem>(), htmlAttributes: new { @class = "form-control", @id = "UserMod", size = 5 })
+                </div>
+                <div class="col-sm-4" align="left">
+                    <br />
+                    @Html.Label("Usuários:")
+                    @Html.ListBoxFor(m => m.ListaParticipantes, new List<SelectListItem>(), htmlAttributes: new { @class = "form-control", @id = "UserName", size = 8 })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10" align="right">
+                <button type="button" onclick="GravarUser(@ViewBag.ReuniaoId)" class="btn btn-default">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+}
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet"/>
+}
+  

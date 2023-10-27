@@ -1,0 +1,31 @@
+﻿@model IntraNet.Mod.RDV.Models.ViewModel.AvatarUserViewModel
+@{
+    Layout = null;
+}
+<form method="post" enctype="multipart/form-data" id="AvatarCreate">
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <h2><i class="glyphicon glyphicon-plus"></i>&nbsp; Gerenc. Imagem.</h2>
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div id="result"></div>
+
+        <div class="form-group">
+            <div class="row col-lg-12">
+                @Html.Label("Avatar:", null, htmlAttributes: new { @class = "control-label col-md-4 LabelLeft" })
+                <div class="col-lg-6">
+                    @Html.TextBoxFor(model => model.ImageFile, new { id= "ImageFile", type = "file", accept = ".png, .jpg, .jpeg" })
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+    <div class="row col-md-12" align="right">
+        <button onclick="CreateAvatar()" class="btn btn-default">
+            <i class="glyphicon glyphicon-ok-sign"></i>&nbsp; Salvar
+        </button>
+    </div>

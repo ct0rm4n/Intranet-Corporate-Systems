@@ -1,0 +1,60 @@
+﻿@model IEnumerable<IntraNet.Domain.Entities.RateioItem>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Centro de Custo")
+        </th>
+        <th>
+            @Html.DisplayName("Codigo")
+        </th>
+        <th>
+            @Html.DisplayName("Item")
+        </th>
+        <th>
+            @Html.DisplayName("Classe")
+        </th>
+        
+        <th>
+            @Html.DisplayName("Prorcentagem")
+        </th>
+        <th>
+            @Html.DisplayName("Prospect")
+        </th>
+        <th>
+
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.empsCCusto.CCustoDesc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.empsCCusto.CCusto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Item)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.unidade.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Porcentagem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prospect)
+        </td>
+        <td>
+            <button onclick="DeletarRateio(@item.RateioItemId)" class="btn btn-default">Remover&nbsp;<i class="glyphicon glyphicon-remove"></i></button>
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,32 @@
+﻿
+<table id="jqGridEmpresa"></table>
+<div id="jqControlsEmpresa"></div>
+@Html.Hidden("EmpresaId")
+@Html.Hidden("RazaoSocial")
+<br />
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="MeuModal">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="~/Scripts/Repositories/ReuniaoRepositorie.js"></script>
+    <script src="~/Scripts/Repositories/ItemReuRepositorie.js"></script>
+    <script src="~/Scripts/Repositories/GridRepositorie.js"></script>
+    <script src="~/Scripts/Interface/AdminInter.js"></script>
+    <script src="~/Scripts/Interface/UserAdminInter.js"></script>
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/ui.jqgrid.css" rel="stylesheet" />
+    <script src="~/Scripts/free-jqGrid/i18n/grid.locale-en.js"></script>
+    <script src="~/Scripts/free-jqGrid/jquery.jqGrid.min.js"></script>
+    <script src="~/Scripts/free-jqGrid/jquery.jqgrid.min.js"></script>
+    <script src="~/Scripts/Repositories/AdminRepositorie.js"></script>
+}
+

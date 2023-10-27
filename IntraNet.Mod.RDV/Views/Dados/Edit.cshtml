@@ -1,0 +1,101 @@
+﻿@model IntraNet.Domain.Entities.DadosBancarios
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = null;
+}
+
+<h2>Editar conta</h2>
+<script>
+    $(document).ready(function () {
+        // only numbers are allowed
+
+
+        // only lowercase alphabets are allowed
+        //$('#text_input_2').filter_input({ regex: '[a-z]' });
+
+        // only URL safe characters are allowed
+        //$('#text_input_3').filter_input({ regex: '[a-zA-Z0-9_]' });
+
+        var $seuCampoCpf = $(".Cpf");
+        $seuCampoCpf.mask('000.000.000-00');
+        var $seuAgencia = $(".Agencia");
+        $seuAgencia.mask('00000');
+        var $seuCCorrente = $(".ContaCorrente");
+        $seuCCorrente.mask('0.000-0');
+        var $seuDv = $("Dv");
+        $seuDv.mask('00', { reverse: false });
+        setTimeout(function () { Mascaras() }, 1000);
+    });
+    function Mascaras(){
+        var $seuCampoCpf = $("#Cpf");
+        $seuCampoCpf.mask('000.000.000-00');
+        var $seuAgencia = $("#Agencia");
+        $seuAgencia.mask('00000');
+        var $seuCCorrente = $("#ContaCorrente");
+        $seuCCorrente.mask('0.000-0');
+        var $seuDv = $("#Dv");
+        $seuDv.mask('00', { reverse: false });
+    }
+
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+
+<script src="~/Scripts/UserDados.js"></script>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>DadosBancarios</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.DadosBancariosId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Agencia, htmlAttributes: new {  @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Agencia, new { htmlAttributes = new { @class = "form-control" , @id = "Agencia"} })
+                @Html.ValidationMessageFor(model => model.Agencia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Dv, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Dv, new { htmlAttributes = new { @class = "form-control" , @id = "Dv"} })
+                @Html.ValidationMessageFor(model => model.Dv, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ContaCorrente, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ContaCorrente, new { htmlAttributes = new { @class = "form-control" , @id = "ContaCorrente"} })
+                @Html.ValidationMessageFor(model => model.ContaCorrente, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Cpf, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Cpf, new { htmlAttributes = new { @class = "form-control", @id="Cpf", @datamask = "00/00/0000" } })
+                @Html.ValidationMessageFor(model => model.Cpf, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,54 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    var user = User.Identity.GetUserName();
+}
+<body>
+    <div id="lateral">
+        <div align="center">
+            <img src='@Html.Action("UserAvatar", "Manage")' onclick="GerenciarAvatar()"width="75%"  id="AvatarUser" />
+        </div>
+        <br />
+        <div class="dropbtnLegenda">
+            <div align="left"><i class="fa fa-cogs fa">&nbsp;</i>@user.ToString()</div>
+        </div>
+        <br />
+        <div class="Menulateral" align="left">
+            <div class="dropdown" >
+                <button data-toggle="collapse" data-target="#dash" class="dropbtn"><i id="iconleft" class="glyphicon glyphicon-dashboard"></i> Dashboard<i id="iconright" class="glyphicon glyphicon-chevron-down"></i></button>
+                <ul class="sub-menu collapse" id="dash">
+                    <li class="dropdown-content">
+                        <a href="@Url.Action("Index", "Relatorio")"><i class="glyphicon glyphicon-chevron-right"></i> Relatórios</a>
+                        <a href="@Url.Action("Index", "Financeiro")"><i class="glyphicon glyphicon-chevron-right"></i> Financeiro</a>
+                    </li>
+                </ul>
+                <button data-toggle="collapse" data-target="#cadast" class="dropbtn"><i id="iconleft" class="glyphicon glyphicon-align-justify"></i> Cadastros<i id="iconright" class="glyphicon glyphicon-chevron-down"></i></button>
+                <ul class="sub-menu collapse" id="cadast">
+                    <li class="dropdown-content">
+                        <a href="@Url.Action("Index", "Administrador")"><i id="iconleft" class="glyphicon glyphicon-chevron-right"></i> Empresas</a>
+                        <a href="@Url.Action("ControleEmp", "Administrador")"><i id="iconleft" class="glyphicon glyphicon-chevron-right"></i> C.Custo</a>
+                    </li>
+                </ul>
+                <button data-toggle="collapse" data-target="#reuniao" class="dropbtn"><i id="iconleft" class="glyphicon glyphicon-lock"></i> Relatórios <i class="glyphicon glyphicon-chevron-down" id="iconright"></i></button>
+                <ul class="sub-menu collapse" id="reuniao">
+                    <li class="dropdown-content">
+                        <a href="@Url.Action("Index", "Relatorio")"><i id="iconleft" class="glyphicon glyphicon-chevron-right"></i> Geral</a>
+                        <a href="@Url.Action("Index", "Relatorio")"><i id="iconleft" class="glyphicon glyphicon-chevron-right"></i> Aprovador</a>
+                        <a href="@Url.Action("Index", "Relatorio")"><i id="iconleft" class="glyphicon glyphicon-chevron-right"></i> Financeiro</a>
+                    </li>
+                </ul>
+                <button data-toggle="collapse" data-target="#usuario" class="dropbtn"><i class="glyphicon glyphicon-user" id="iconleft"></i> Usuários          <i class="glyphicon glyphicon-chevron-down" id="iconright"></i></button>
+                <ul class="sub-menu collapse" id="usuario">
+                    <li class="dropdown-content" >
+                        <a href="@Url.Action("Index", "UsersAdmin")"><i class="glyphicon glyphicon-chevron-right" id="iconleft"></i> Usuários</a>
+                        <a href="@Url.Action("Index", "RolesAdmin")"><i class="glyphicon glyphicon-chevron-right" id="iconleft"></i> Perfis</a>
+                        <a href="@Url.Action("Index", "ClaimsAdmin")"><i class="glyphicon glyphicon-chevron-right" id="iconleft"></i> Funções</a>
+                    </li>
+                    <!-- mais links -->
+                </ul>
+                <br />
+            </div>
+            <!-- mais seções -->
+        </div> <!-- /#menu -->
+    </div> <!-- vazio --> <div>
+</div> <!-- /#lateral -->
+</body>

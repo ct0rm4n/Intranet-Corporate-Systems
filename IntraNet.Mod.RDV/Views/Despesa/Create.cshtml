@@ -1,0 +1,70 @@
+﻿@model IntraNet.Mod.RDV.Models.ViewModel.DespesasViewModel
+
+@{
+    Layout = null;
+    ViewBag.Title = "Create";
+}
+
+<h2><i class="glyphicon glyphicon-plus"></i>&nbsp; Nova Despesa.</h2>
+<hr />
+<form method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal" align="right">
+        @Html.ValidationSummary(true)
+        <div id="result"></div>
+        <div class="row col-lg-12">
+            @Html.LabelFor(model => model.TipoDespesaId, "Tipo:", htmlAttributes: new { @class = "control-label col-md-4 LabelLeft" })
+            <div class="col-lg-6">
+                @Html.DropDownListFor(model => model.TipoDespesaId, null, "Selecione", new { @id= "TipoDespesaId", @class = "form-control", @onchange = "TipoDespesaSelector()" })
+            </div>
+        </div>        
+        <br/>
+        <div class="DescricaoDiv" id="DescricaoDiv">
+            <div class="row col-lg-12">
+                @Html.Label("Descrição:", htmlAttributes: new { @class = "control-label col-md-4 LabelLeft DescricaoTeste", @id="DescricaoTeste" })
+                <div class="col-lg-6">
+                    @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control", onchange= "SelecionaVeiculo()", @Value = "N/A" } })
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="row col-lg-12">
+            @Html.LabelFor(model => model.Observacao, "Observações:", htmlAttributes: new { @class = "control-label col-md-4 LabelLeft" })
+            <div class="col-lg-6">
+                @Html.TextAreaFor(model => model.Observacao, new { @class = "form-control", rows = 2, placeholder = "Descreve a dispesa gerada" })
+            </div>
+        </div>
+        <br/>
+        <div class="row col-lg-12">
+            @Html.LabelFor(model => model.Valor, "Valor:", htmlAttributes: new { @class = "control-label col-md-4 LabelLeft" })
+            <div class="col-lg-4">
+                @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control", style = "z-index:1;" ,@onkeypress= "MascarasR()" } })
+                
+            </div>
+            <div class="col-lg-2">
+                <a id="calc" onclick="$('#Valor').calculator()"><img src="~/Images/calculator.png" width="35px" /></a>
+            </div>
+        </div>
+        <br/>
+        
+        <br/>
+        @Html.HiddenFor(model => model.RelatorioId, new { @class = "form-control", @Value = ViewBag.RelatorioId })
+        @Html.HiddenFor(model => model.UserId, new { @class = "form-control", @Value = ViewBag.UserId })
+    </div>
+</form>
+<hr />
+<div class="row col-lg-12" align="right">
+    <button class="btn btn-default" onclick="DespesasCreate(novo = false)">
+        <i class="glyphicon glyphicon-ok-sign"></i>&nbsp; Salvar
+    </button>
+    <button class="btn btn-default" onclick="DespesasCreate(novo = true)">
+        <i class="glyphicon glyphicon-plus"></i>&nbsp; Salvar e Novo
+    </button>
+    <button class="btn btn-default" onclick="$('#myModal').modal('hide');">
+        <i class="glyphicon glyphicon-remove"></i>&nbsp; Cancelar
+    </button>
+</div>
+
+@section Scripts { 
+    @Scripts.Render("~/bundles/jqueryval")
+}

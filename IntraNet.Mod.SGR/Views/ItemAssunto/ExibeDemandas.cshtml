@@ -1,0 +1,50 @@
+﻿@model IntraNet.Mod.SGR.Models.ViewModel.ItemAssuntoViewModel
+@{
+    Layout = null;
+}
+<div>
+    <h4><i class="fa fa-bookmark-o"></i>&nbsp;Assunto&nbsp;<i class="fa fa-caret-right"></i>&nbsp;@Html.DropDownList("AssuntoId", null, htmlAttributes: new { @class = "", @disabled = "disabled" })&nbsp;<i class="fa fa-thumb-tack"></i>&nbsp;Item&nbsp;<i class="fa fa-caret-right"></i>&nbsp;@Html.DropDownList("ItemAssuntoId", null, htmlAttributes: new { @class = "" })&nbsp;<i class="fa fa-caret-right"></i>&nbsp;</h4>
+    <hr/>
+    <div id="MensagemItem"></div>
+    <div class="container">
+
+        <div class="col-lg-7 row">
+            <div align="left" class="col-lg-4">
+                <b>@Html.Label("Situação:")</b>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="col-lg-12">
+                    @Html.DropDownListFor(model=>model.Situacao, null, htmlAttributes: new {@class = "Situacao_item", @id= "Situacao_item", @disabled = "disabled"})
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="col-lg-7 row" style="padding-top: 1%; padding-bottom: 1%;">
+            <div align="left" class="col-lg-4">
+                <b>@Html.Label("Responsavel:")</b>
+            </div>
+            <div class="col-lg-8">
+                <div class="col-lg-12">
+                    @Html.ListBox("Responsavel", null, htmlAttributes: new {@class = "form-control"})
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/Interface/DemandasInter.js"></script>
+</div>
+<div>
+    <div class="panel panel-primary" style="width: 100%">
+        <div class="panel-heading row">
+            <div class="col-lg-4" align="left"><label><i class="fa fa-calendar">&nbsp;</i>Demandas&nbsp;<a href="#" data-trigger="hover" id="6wInfo" data-title="<i class='fa fa-info-circle'></i><b>Técnica 6W2H - Gestão estratégica</b>" data-toggle="popover" data-content="6W:</br>O que?(What- o que será feito?) </br>Por quê?(Why- por que será feito?) </br>Onde?(Where- onde será feito?) </br>Quando?(When- quando?) </br>Demandado?(Who- por quem será feito?)</br>Quem?(Whom- de quem é a demandado?)</br></br>2H:</br>Como?(How- como será feito/processo tecnologico?) </br>Quanto(How much- quanto vai custar? Ganhos?)</br>"  data-html="true"><i class="fa fa-info-circle"></i></a>&nbsp;<i class="fa fa-wrench"></i>&nbsp;Historico de Ações</label></div>
+            <div class="col-lg-7" align="right">Total:@ViewBag.DemandasQtd ,&nbsp;Em Aberto:@ViewBag.DemandasA ,&nbsp;Suspensas:@ViewBag.DemandasS,&nbsp;Encerradas:@ViewBag.DemandasE</div>
+            <div class="col-lg-1"><button class="btn btn-default btnReuniao" onclick="ExibirResumo()">&nbsp;<i class="fa fa-chevron-circle-down">&nbsp;</i></button></div>
+        </div>
+        <div class="panel-body row" id="TabelaAcoes" style="width: 100%; padding:0px">
+            @Html.Action("Index", "Demanda", new { id = Model.ItemAssuntoId })
+        </div>
+        <script src="~/Scripts/Interface/UserInter.js"></script>
+    </div>
+</div>
+<br />
+

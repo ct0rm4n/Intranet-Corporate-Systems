@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{867B3E5D-A4E9-4557-93C8-21659E9810BC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IntraNet.Domain</RootNamespace>
+    <AssemblyName>IntraNet.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Entities\RDV\Adiantamento.cs" />
+    <Compile Include="Entities\RDV\Aprovador.cs" />
+    <Compile Include="Entities\RDV\DadosBancarios.cs" />
+    <Compile Include="Entities\RDV\DespesaAnexo.cs" />
+    <Compile Include="Entities\RDV\EmailService.cs" />
+    <Compile Include="Entities\RDV\Financeiro.cs" />
+    <Compile Include="Entities\RDV\KMValor.cs" />
+    <Compile Include="Entities\RDV\RateioItem.cs" />
+    <Compile Include="Entities\RDV\Setor.cs" />
+    <Compile Include="Entities\RDV\Despesas.cs" />
+    <Compile Include="Entities\RDV\EmpCCusto.cs" />
+    <Compile Include="Entities\RDV\Empresa.cs" />
+    <Compile Include="Entities\RDV\SetorEmp.cs" />
+    <Compile Include="Entities\RDV\Relatorio.cs" />
+    <Compile Include="Entities\RDV\SolicitaCCusto.cs" />
+    <Compile Include="Entities\RDV\SolicitaEmpresa.cs" />
+    <Compile Include="Entities\RDV\TipoDespesa.cs" />
+    <Compile Include="Entities\RDV\Unidade.cs" />
+    <Compile Include="Entities\SGR\AcaoDemanda.cs" />
+    <Compile Include="Entities\SGR\AnexoItem.cs" />
+    <Compile Include="Entities\SGR\Assunto.cs" />
+    <Compile Include="Entities\SGR\Demanda.cs" />
+    <Compile Include="Entities\SGR\ItemAssunto.cs" />
+    <Compile Include="Entities\SGR\ItemReuniao.cs" />
+    <Compile Include="Entities\SGR\Reuniao.cs" />
+    <Compile Include="Entities\SGR\UserDemanda.cs" />
+    <Compile Include="Entities\SGR\UserReuniao.cs" />
+    <Compile Include="Helpers\Utility.cs" />
+    <Compile Include="Interfaces\Repositories\IBaseRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IDadosBancariosRespository.cs" />
+    <Compile Include="Interfaces\Repositories\ISetorRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IDespesaRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IEmpCCustoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ISetorEmp.cs" />
+    <Compile Include="Interfaces\Repositories\IEmpresaRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IRelatorioRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IUnidadeRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IntraNet.Security\IntraNet.Security.csproj">
+      <Project>{957B55BF-7C9E-46D4-9A1D-C275F4B00CCA}</Project>
+      <Name>IntraNet.Security</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,263 @@
+﻿@model IntraNet.Mod.RDV.Models.ViewModel.RelatorioViewModel
+@using System.Web.Mvc
+@{
+    ViewBag.Title = "ViewAprov";
+}
+<div class="form-horizontal row col-lg-12">
+    <h3 class="col-lg-8" align="center">
+        <img src="~/Images/relat_icon.png" width="4%" />
+        Relatório de Reembolso de Despesas
+    </h3>
+    <div class="col-lg-4" align="left" style="padding-top:2%">
+        @Html.Label("Situação:", htmlAttributes: new { @class = "control-label col-md-3 left" })
+        <div class="col-md-2" align="right">
+            @Html.EditorFor(model => model.Situacao, new { htmlAttributes = new { @class = "form-control col-md-2 Situacao",@title=""+ @Model.Situacao+"", @disabled = "disabled", @id = "SituacaoRelat" } })
+        </div>
+        <div>
+            <p><b>@Model.Situacao</b></p>
+        </div>
+    </div>
+</div>
+<div class="row col-lg-12">
+    <div class="alert alert-danger col-lg-9">
+        <label class="danger">* Você esta como modo</label> 
+        @if (User.IsInRole("Aprovador"))
+        { <label class="danger">Aprovador</label> }
+        @if (User.IsInRole("Moderador"))
+        { <label class="danger">Moderador</label> }
+        <p>Caso encontre encontre dados incoerentes, favor solicitar revisão ao usuário.</p>
+    </div>
+    <div class="col-lg-3">
+        @if (User.IsInRole("Aprovador"))
+        {
+            <button class="btn btn-default col-lg-10" onclick="AprovarRelat(@Model.RelatorioId)">Confirmar Aprovação&nbsp;<i class="glyphicon glyphicon-ok-sign"></i></button>
+        }
+        @if (User.IsInRole("Moderador"))
+        {
+            <button class="btn btn-default col-lg-10" onclick="AprovarRev(@Model.RelatorioId)">Confirmar Revisão&nbsp;<i class="glyphicon glyphicon-ok-sign"></i></button>
+        }
+        <button class="btn btn-default col-lg-10" onclick="Revisar()">Solicitar Revisão&nbsp;<i class="glyphicon glyphicon-warning-sign"></i></button>
+        
+        <button class="btn btn-default col-lg-10" onclick="location.href ='@Url.Action("UserReport", "Relatorio", new { id=@Model.RelatorioId})'">Download&nbsp;<i class="glyphicon glyphicon-download-alt"></i></button>        
+    </div>
+</div>
+<div >
+    <fieldset id="RevisaoAdd" runat="server">
+        @Html.Action("Revisao", "Relatorio", new {id = ViewBag.RelatorioId})
+    </fieldset>
+</div>
+    <div class="form-horizontal row col-lg-10">       
+        
+    </div>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <!--VALIDAÇÃO-->
+    <div id="AlertEditRelatorio">
+    </div>
+    <div class="row col-lg-12">
+        <div class="col-md-8">
+            <div class="row">
+                @Html.Label("Empresa:", htmlAttributes: new { @class = "control-label col-md-2" })@Html.Label("Solicitante:", htmlAttributes: new { @class = "control-label col-md-2" })
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.DropDownListFor(model => model.EmpresaId, null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+                </div>
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                </div>
+            </div>
+            <div class="row">
+                @Html.Label("Motivo da Viagem:", htmlAttributes: new { @class = "control-label col-md-6" })
+            </div>
+            <div class="row col-md-12" style="width: 100%;">
+                @Html.TextAreaFor(model => model.Motivo, new { @class = "form-control col-md-12", rows = 3, cols = 60, style = "width: 100%; max-width: 100%;", placeholder = "Descreva os motivos para viagem", @disabled = "disabled" })
+                @Html.ValidationMessageFor(model => model.Motivo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                @Html.Label("Saída:", htmlAttributes: new { @class = "control-label col-md-2" })
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.Saida, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    @Html.ValidationMessageFor(model => model.Saida, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <br />&nbsp;<br />
+            </div>
+            <div class="row">
+                @Html.Label("Retorno:", htmlAttributes: new { @class = "control-label col-md-2" })
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.Retorno, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    @Html.ValidationMessageFor(model => model.Retorno, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row col-lg-12">
+        <div class="col-lg-4" align="left" style="padding-left: 0;">
+            @Html.Label("Dados Bancarios para Reembolso:", htmlAttributes: new { @class = "control-label col-md-12" })<a class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Gerenciar dados bancarios" onclick="location.href='@Url.Action("index","Dados")'"></a>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.DadosBancariosId, null, "Selecione", new { @class = "form-control", @disabled = "disabled" })
+                @Html.ValidationMessageFor(model => model.DadosBancariosId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-lg-4" align="left">
+            @Html.Label("Aprovador responsavel:", htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.AprovadorId, null, new { @class = "form-control", @disabled = "disabled" })
+                @Html.ValidationMessageFor(model => model.AprovadorId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-lg-4" align="right">
+            <button class="btn btn-default" onclick="CadastrarRelatController()" disabled>Prosseguir &nbsp;<i class="glyphicon glyphicon-ok"></i></button>
+        </div>
+    </div>
+    <hr />
+    <div class="col-md-12">
+        <div class="container">
+            <div class="panel panel-primary" style="width: 100%">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-lg-10">
+                            <h4 align="center">
+                                <i class="glyphicon glyphicon-usd">&nbsp;</i><b>&nbsp;Especificação das Despesas</b>
+                            </h4>
+                        </div>
+
+                        <div class="col-lg-2">
+                            @{
+                                var Id = Model.RelatorioId;
+                            }
+                            <button onclick="InserirDespesa('@Id')" class="btn btn-default col-lg-12" disabled>Inserir Despesa &nbsp;<i class="glyphicon glyphicon-plus"></i></button>
+                            <button class="btn btn-default col-lg-12" onclick="GerenciarComprovantes('@Id')">Comprovates&nbsp;<i class="glyphicon glyphicon-camera"></i></button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="panel-body col-md-12">
+                    <div>
+                        <fieldset disabled="disabled">
+                            @Html.Action("Index", "Despesa", new { id = ViewBag.RelatorioId })
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="col-md-12">
+        <div class="container">
+            <div class="panel panel-primary" style="width: 100%">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-lg-10">
+                            <h4 align="center">
+                                <i class=""></i><b>Rateio das Despesas</b>
+                            </h4>
+                        </div>
+                        <div class="col-lg-2">
+                            <button onclick="btnAddRateio()" class="btn btn-default" disabled>Novo &nbsp;<i class="glyphicon glyphicon-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body col-md-12">
+                    <div>
+                        <fieldset id="RateioAdd" runat="server" >
+                            @Html.Action("Create", "RateioItems", new { id = ViewBag.RelatorioId, UserId = Model.UserId })
+                        </fieldset>
+                        <fieldset disabled="disabled">
+                            @Html.Action("Index", "RateioItems", new { id = ViewBag.RelatorioId, UserId = Model.UserId })
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="form-group">
+        <div class="col-md-10">
+
+            <div class="col-md-7">
+
+                <div class="container">
+                    <div class="panel panel-primary" style="width: 100%">
+                        <div class="panel-heading" align="center"><h4><i class="glyphicon glyphicon-ok-sign"></i>&nbsp;<b>RESUMO DO RELATÓRIO</b></h4></div>
+                        <div class="panel-body col-md-12">
+                            <br />
+                            <div class="row">
+
+                                <div class="col">
+                                    @Html.Label("Adiantamento:", htmlAttributes: new { @class = "control-label col-md-5" })
+                                </div>
+
+                                <div class="col col-md-6">
+                                    @Html.DropDownListFor(model => model.AdiantamentoId, null, htmlAttributes: new { @class = "form-control Adiantamento", @placeholder = "0,00", @Value = ViewBag.AdiantamentoId, @id = "AdiantamentoId", onchange = "Calcular()" })
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    @Html.Label("Total:", htmlAttributes: new { @class = "control-label col-md-5" })
+                                </div>
+                                <div class="col col-md-6">
+                                    @Html.Editor("Total", new { htmlAttributes = new { @class = "form-control", placeholder = "00.00", @disabled = "disabled", @Value = ViewBag.Total } })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    @Html.Label("A receber:", htmlAttributes: new { @class = "control-label col-md-5" })
+                                </div>
+                                <div class="col col-md-6">
+                                    @Html.Editor("AReceber", new { htmlAttributes = new { @class = "form-control", placeholder = "00.00", @disabled = "disabled" } })
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        @Html.HiddenFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.UserName } })
+        @Html.HiddenFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.UserId } })
+        @Html.HiddenFor(model => model.RelatorioId, new { htmlAttributes = new { @class = "form-control" } })
+
+    </div>
+    <!--form-->
+    <br />
+<hr/>
+
+<div align="right">
+    <a class="btn btn-default" href="@Url.Action("UserReport", "Relatorio", new {id = ViewBag.RelatorioId})">PDF &nbsp;<i class="glyphicon glyphicon-download-alt"></i></a> <button type="submit" class="btn btn-default" onclick="SalvarEdicaoController(@ViewBag.RelatorioId)" disabled="disabled">Salvar &nbsp;<i class="glyphicon glyphicon-pencil"></i></button>
+</div>
+</div>
+<!--MODAL-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="MeuModal">
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/UserRelatorio.js"></script>
+    <script src="~/Scripts/UserDespesas.js"></script>
+    <script src="~/Scripts/UserAprovador.js">    </script>
+    <script src="~/Scripts/Interface/UserPadraoInter.js"></script>
+   
+}
+
+

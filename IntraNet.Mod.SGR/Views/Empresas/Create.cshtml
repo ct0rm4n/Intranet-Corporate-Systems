@@ -1,0 +1,57 @@
+﻿@model IntraNet.Mod.SGR.Models.Identity.EmpresaCreateViewModel
+@{
+    ViewBag.Title = "Criar";
+    Layout = null;
+}
+<div>
+    @using (Ajax.BeginForm("EmpresasCreate", "Empresa", new AjaxOptions { OnBegin = "", OnFailure = "" }, new { id = "CreateAdmin" }))
+    {
+        @Html.AntiForgeryToken()
+        <h4><i class="fa fa-user-plus"></i>&nbsp;Criar empresa</h4>
+
+        <hr />
+        @Html.ValidationSummary("", new { @class = "text-error" })
+
+        <div class="form-horizontal" align="left">
+
+            <div>
+                <div id="result"></div>
+                <div class="row col-lg-12 form-group">
+
+                    <div class="col-lg-6">
+                        <label class="col-md-5">Razao social:&nbsp;</label>
+                        <div class="col-lg-12">
+                            @Html.TextBoxFor(m => m.RazaoSocial, htmlAttributes: new { @class = "form-control", })
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <label class="col-md-4">Codigo Empresa ERP:&nbsp;</label>
+                        <div class="col-lg-12">
+                            @Html.TextBoxFor(m => m.CodSiga, htmlAttributes: new { @class = "form-control", })
+                        </div>
+                    </div>
+                </div>@Html.Hidden("Ativo", new { @Value=ViewBag.Ativo, @class = "form-control", })
+            </div>
+            <div class="panel panel-primary" style="width: 100%">
+                <div class="panel-heading row">
+                    <div class="col-lg-10"><label>Empresa&nbsp;<i class="fa fa-caret-right"></i>&nbsp;Unidades:&nbsp;<i class="fa fa-star-half-o"></i></label></div>
+                </div>
+                <div class="panel-body row" id="ResumoPanel">
+
+                </div>
+            </div>
+
+
+
+        </div>
+    }
+    <div class="form-group">
+        <div class="col-md-12" align="right">
+            <button class="btn btn-default btnReuniao" onclick="InserirEmpresaRep()"> <i class="fa fa-lg fa-fw fa-floppy-o">&nbsp;</i>Salvar</button>
+            <button class="btn btn-default btnReuniao" onclick="$('#myModal').modal('hide');"> <i class="fa fa-lg fa-fw fa-ban">&nbsp;</i>Cancelar</button>
+        </div>
+    </div>
+</div>
+
+

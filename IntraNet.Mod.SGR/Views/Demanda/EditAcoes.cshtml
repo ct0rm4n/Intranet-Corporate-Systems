@@ -1,0 +1,113 @@
+﻿@model IntraNet.Mod.SGR.Models.ViewModel.EditDemandaViewModel
+@{
+    Layout = null;
+}
+<div>
+    <h3><i class="fa fa-calendar fa-2x">&nbsp;</i>Demanda(6w2h)&nbsp;<i class="fa fa-caret-right"></i>&nbsp; Tarefas</h3>
+
+    <div id="MensagemDemanda"></div>
+    <div class="container">
+        <div>
+            <div id="result"></div>
+            <div class="row col-lg-12" align="left" style="display:none">
+                <div>
+                    @Html.Editor("ReuniaoId", new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.ReuniaoId_ } })
+                </div>
+                <div class="col-lg-4">
+                    @Html.LabelFor(model => model.Situacao, "Situação:", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-12">
+                        @Html.DropDownList("Situacao", null, htmlAttributes: new { @class = "form-control" })
+                    </div>
+
+                </div>
+                <div class="col-lg-4">
+                    @Html.Label("Assuto:", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-12">
+                        @Html.DropDownList("AssuntoId", null, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    @Html.Label("Item:", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-12">
+                        @Html.DropDownList("ItemAssuntoId", null, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                </div>
+
+            </div>
+            <hr />
+            
+            <div align="left">
+                <div class="col-lg-12 row" style="float: left;text-align: left; align-items: left">
+                    @Html.LabelFor(model => model.Oque, "O que?", htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-12">
+                        @Html.TextAreaFor(model => model.Oque, htmlAttributes: new { @class = "form-control", rows = 3, cols = 30, @style = "width: 100%; max-width: 100%;" })
+                    </div>
+
+                </div>
+                <div class="col-lg-12 row">
+                    @Html.Label("Onde?", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.Onde, new { htmlAttributes = new { @class = "form-control", @style = "width: 100%; max-width: 100%;" } })
+                    </div>
+                </div>
+
+                
+                <div class="col-lg-12 row" align="left" style="float: left; align-items: left">
+
+                    <div class="col-md-6" style="float: left; align-items: left">
+                        @Html.Label("Quanto?", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-lg-12 row">
+                            @Html.EditorFor(model => model.Quanto, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+
+                    <div class="col-md-6" style="float: left; align-items: left">
+                        @Html.Label("Até Quando?", htmlAttributes: new { @class = "control-label col-md-8" })
+                        <div class="col-lg-12 row">
+                            @Html.EditorFor(model => model.Quando, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 row" align="left">
+                    @Html.Label("Como?", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                        @Html.TextAreaFor(model => model.Como, htmlAttributes: new { @class = "form-control", rows = 2, cols = 60, style = "width: 100%; max-width: 100%;" })
+                    </div>
+                </div>
+                <div class="col-lg-12 row" align="left">
+                    @Html.Label("Porque?", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                        @Html.TextAreaFor(model => model.Porque, htmlAttributes: new { @class = "form-control", rows = 2, cols = 60, style = "width: 100%; max-width: 100%;" })
+                    </div>
+
+                </div>
+                <div class="col-lg-12 row">
+
+
+
+                    <div class="col-lg-10">
+                        @Html.Label("Demandado?", htmlAttributes: new { @class = "col-md-3" })
+                        <div class="col-lg-12 row">
+                            <select id="Demandado" class="form-control" multiple="">
+                                @foreach (var item in ViewBag.Demandado)
+                                {
+
+                                    <option value="@item" selected>@item</option>
+
+                                }
+
+
+                            </select>
+
+                        </div>
+                    </div>
+
+                </div>
+                <script src="~/Scripts/Interface/DemandasInter.js"></script>
+                
+            </div>            
+        </div>
+    </div>
+</div>
+

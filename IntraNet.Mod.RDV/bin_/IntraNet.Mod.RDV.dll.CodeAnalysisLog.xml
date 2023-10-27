@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="c:\program files (x86)\microsoft visual studio 14.0\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
+<FxCopReport Version="14.0">
+ <Targets>
+  <Target Name="C:\Systems\IntraNet\rdv\IntraNet.Mod.RDV\bin\IntraNet.Mod.RDV.dll">
+   <Modules>
+    <Module Name="intranet.mod.rdv.dll">
+     <Namespaces>
+      <Namespace Name="IntraNet.Mod.RDV.Controllers">
+       <Types>
+        <Type Name="DespesaController" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Dispose(System.Boolean)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message Id="_repRelat" TypeName="DisposableFieldsShouldBeDisposed" Category="Microsoft.Usage" CheckId="CA2213" Status="Active" Created="2018-09-19 02:47:58Z" FixCategory="NonBreaking">
+             <Issue Certainty="75" Level="Warning" Path="C:\Systems\IntraNet\rdv\IntraNet.Mod.RDV\Controllers" File="DespesaController.cs" Line="172">'DespesaController' contains field 'DespesaController._repRelat' that is of IDisposable type: 'RelatorioRepository'. Change the Dispose method on 'DespesaController' to call Dispose or Close on this field.</Issue>
+            </Message>
+            <Message Id="db" TypeName="DisposableFieldsShouldBeDisposed" Category="Microsoft.Usage" CheckId="CA2213" Status="Active" Created="2018-09-19 02:47:58Z" FixCategory="NonBreaking">
+             <Issue Certainty="75" Level="Warning" Path="C:\Systems\IntraNet\rdv\IntraNet.Mod.RDV\Controllers" File="DespesaController.cs" Line="172">'DespesaController' contains field 'DespesaController.db' that is of IDisposable type: 'ContextRDV'. Change the Dispose method on 'DespesaController' to call Dispose or Close on this field.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="EmpCCustoController" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Dispose(System.Boolean)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message Id="_repEmp" TypeName="DisposableFieldsShouldBeDisposed" Category="Microsoft.Usage" CheckId="CA2213" Status="Active" Created="2018-09-19 02:47:58Z" FixCategory="NonBreaking">
+             <Issue Certainty="75" Level="Warning" Path="C:\Systems\IntraNet\rdv\IntraNet.Mod.RDV\Controllers" File="EmpCCustoController.cs" Line="181">'EmpCCustoController' contains field 'EmpCCustoController._repEmp' that is of IDisposable type: 'EmpresaRepository'. Change the Dispose method on 'EmpCCustoController' to call Dispose or Close on this field.</Issue>
+            </Message>
+            <Message Id="_repEmpDp" TypeName="DisposableFieldsShouldBeDisposed" Category="Microsoft.Usage" CheckId="CA2213" Status="Active" Created="2018-09-19 02:47:58Z" FixCategory="NonBreaking">
+             <Issue Certainty="75" Level="Warning" Path="C:\Systems\IntraNet\rdv\IntraNet.Mod.RDV\Controllers" File="EmpCCustoController.cs" Line="181">'EmpCCustoController' contains field 'EmpCCustoController._repEmpDp' that is of IDisposable type: 'SetorEmpRepository'. Change the Dispose method on 'EmpCCustoController' to call Dispose or Close on this field.</Issue>
+            </Message>
+            <Message Id="_repUnid" TypeName="DisposableFieldsShouldBeDisposed" Category="Microsoft.Usage" CheckId="CA2213" Status="Active" Created="2018-09-19 02:47:58Z" FixCategory="NonBreaking">
+             <Issue Certainty="75" Level="Warning" Path="C:\Systems\IntraNet\rdv\IntraNet.Mod.RDV\Controllers" File="EmpCCustoController.cs" Line="181">'EmpCCustoController' contains field 'EmpCCustoController._repUnid' that is of IDisposable type: 'UnidadeRepository'. Change the Dispose method on 'EmpCCustoController' to call Dispose or Close on this field.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="EmpresaController" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Dispose(System.Boolean)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message Id="_repEmp" TypeName="DisposableFieldsShouldBeDisposed" Category="Microsoft.Usage" CheckId="CA2213" Status="Active" Created="2018-09-19 02:47:58Z" FixCategory="NonBreaking">
+             <Issue Certainty="75" Level="Warning" Path="C:\Systems\IntraNet\rdv\IntraNet.Mod.RDV\Controllers" File="EmpresaController.cs" Line="150">'EmpresaController' contains field 'EmpresaController._repEmp' that is of IDisposable type: 'EmpresaRepository'. Change the Dispose method on 'EmpresaController' to call Dispose or Close on this field.</Issue>
+            </Message>
+            <Message Id="_repSetor" TypeName="DisposableFieldsShouldBeDisposed" Category="Microsoft.Usage" CheckId="CA2213" Status="Active" Created="2018-09-19 02:47:58Z" FixCategory="NonBreaking">
+             <Issue Certainty="75" Level="Warning" Path="C:\Systems\IntraNet\rdv\IntraNet.Mod.RDV\Controllers" File="EmpresaController.cs" Line="150">'EmpresaController' contains field 'EmpresaController._repSetor' that is of IDisposable type: 'SetorRepository'. Change the Dispose method on 'EmpresaController' to call Dispose or Close on this field.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="SetorController" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Dispose(System.Boolean)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message Id="_rep" TypeName="DisposableFieldsShouldBeDisposed" Category="Microsoft.Usage" CheckId="CA2213" Status="Active" Created="2018-09-19 02:47:58Z" FixCategory="NonBreaking">
+             <Issue Certainty="75" Level="Warning" Path="C:\Systems\IntraNet\rdv\IntraNet.Mod.RDV\Controllers" File="SetorController.cs" Line="155">'SetorController' contains field 'SetorController._rep' that is of IDisposable type: 'SetorRepository'. Change the Dispose method on 'SetorController' to call Dispose or Close on this field.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="SetorEmpController" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Dispose(System.Boolean)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message Id="_repDepto" TypeName="DisposableFieldsShouldBeDisposed" Category="Microsoft.Usage" CheckId="CA2213" Status="Active" Created="2018-09-19 02:47:58Z" FixCategory="NonBreaking">
+             <Issue Certainty="75" Level="Warning" Path="C:\Systems\IntraNet\rdv\IntraNet.Mod.RDV\Controllers" File="SetorEmpController.cs" Line="197">'SetorEmpController' contains field 'SetorEmpController._repDepto' that is of IDisposable type: 'SetorRepository'. Change the Dispose method on 'SetorEmpController' to call Dispose or Close on this field.</Issue>
+            </Message>
+            <Message Id="_repEmp" TypeName="DisposableFieldsShouldBeDisposed" Category="Microsoft.Usage" CheckId="CA2213" Status="Active" Created="2018-09-19 02:47:58Z" FixCategory="NonBreaking">
+             <Issue Certainty="75" Level="Warning" Path="C:\Systems\IntraNet\rdv\IntraNet.Mod.RDV\Controllers" File="SetorEmpController.cs" Line="197">'SetorEmpController' contains field 'SetorEmpController._repEmp' that is of IDisposable type: 'EmpresaRepository'. Change the Dispose method on 'SetorEmpController' to call Dispose or Close on this field.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+ </Targets>
+ <Rules>
+  <Rule TypeName="DisposableFieldsShouldBeDisposed" Category="Microsoft.Usage" CheckId="CA2213">
+   <Name>Disposable fields should be disposed</Name>
+   <Description>If a type that implements IDisposable owns fields that also implement IDisposable, the encapsulating type's Dispose() implementation should call Dispose() on each disposable field.</Description>
+   <Resolution Name="Default">{0} contains field {1} that is of IDisposable type: {2}. Change the Dispose method on {0} to call Dispose or Close on this field.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182328.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="75">Warning</MessageLevel>
+   <File Name="usagerules.dll" Version="14.0.0.0" />
+  </Rule>
+ </Rules>
+ <Localized>
+  <String Key="Category">Category</String>
+  <String Key="Certainty">Certainty</String>
+  <String Key="CollapseAll">Collapse All</String>
+  <String Key="CheckId">Check Id</String>
+  <String Key="Error">Error</String>
+  <String Key="Errors">error(s)</String>
+  <String Key="ExpandAll">Expand All</String>
+  <String Key="Help">Help</String>
+  <String Key="Line">Line</String>
+  <String Key="Messages">message(s)</String>
+  <String Key="LocationNotStoredInPdb">[Location not stored in Pdb]</String>
+  <String Key="Project">Project</String>
+  <String Key="Resolution">Resolution</String>
+  <String Key="Rule">Rule</String>
+  <String Key="RuleFile">Rule File</String>
+  <String Key="RuleDescription">Rule Description</String>
+  <String Key="Source">Source</String>
+  <String Key="Status">Status</String>
+  <String Key="Target">Target</String>
+  <String Key="Warning">Warning</String>
+  <String Key="Warnings">warning(s)</String>
+  <String Key="ReportTitle">Code Analysis Report</String>
+ </Localized>
+</FxCopReport>

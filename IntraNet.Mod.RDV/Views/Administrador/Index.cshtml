@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+@Html.Partial("_AdmMenuPartialView")
+<h2 align="center"><i class="glyphicon glyphicon-align-justify">&nbsp;</i>&nbsp;Controle - Empresa, Unidades e Setores</h2>
+<div class="container body-content" align="right" style="padding-left: 15%">
+    
+    <hr />
+    <!-- DEVE FILTRAR A REUNIAO QUE USUÁRIO PARTICIPA-->
+    <table id="jqGridEmpresa"></table>
+    <div id="jqControlsEmpresa"></div>
+    <br/>
+    <div class="row">
+        <div class="col-lg-6" align="left">
+            <div class="col-lg-3">@Html.Label("EmpresaId:")&nbsp;</div><div class="col-lg-2">@Html.Editor("AlterarEmp", new { htmlAttributes = new { @class = "form-control AlterarEmp", @disabled = "disabled" } })</div>
+        </div>
+        <div class="col-lg-6" align="right">
+            <button class="btn btn-default btnEdtEmp" id="">Alterar&nbsp;<i class="glyphicon glyphicon-pencil"></i></button>&nbsp;<button class="btn btn-default btnContCC" id="">C.Custo - Controle&nbsp;<i class="glyphicon glyphicon-wrench"></i></button>&nbsp;<button class="btn btn-default btnCadEmp" id="">Cadastrar&nbsp;<i class="glyphicon glyphicon-plus"></i></button>
+
+        </div>
+    </div>
+        <hr />
+    <table id="jqGridUnidade"></table>
+    <div id="jqControlsUnidade"></div>
+    <br />
+    <button class="btn btn-default btnCadUnid" id="">Cadastrar&nbsp;<i class="glyphicon glyphicon-plus"></i></button>
+    <hr />
+    <table id="jqGridSetor"></table>
+    <div id="jqGridSetor"></div>
+    <br />
+    <button class="btn btn-default btnCadDepto" id="">Cadastrar&nbsp;<i class="glyphicon glyphicon-plus"></i></button>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="MeuModal">
+                </div>                
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+@Scripts.Render("~/bundles/jqueryval")
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>  
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+<link href="~/Content/jquery.jqGrid/ui.jqgrid.css" rel="stylesheet" />
+<script src="~/Scripts/i18n/grid.locale-en.js"></script>
+<script src="~/Scripts/jquery.jqGrid.min.js"></script>
+<script src="~/Scripts/AdminMaster.js"></script>
+<script src="~/Scripts/AdminGrid.js"></script>
+<script src="~/Scripts/Repositories/UserPadraoRepositorie.js"></script>
+<script src="~/Scripts/Interface/UserPadraoInter.js"></script>
+}  

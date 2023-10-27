@@ -1,0 +1,118 @@
+﻿@model IEnumerable<IntraNet.Domain.Entities.DadosBancarios>
+
+@{
+    ViewBag.Title = "Index";
+}
+<br/>
+<!--<script src="~/Scripts/AdminMaster.js"></script>-->
+<div class="row">
+    <div class="col-lg-12">
+        <div >
+            <div class="panel panel-primary" style="width: 100%">
+
+                <div class="panel-heading">
+
+                    <h1 align="center" class="panel-title row">
+
+                        
+                        <label class="col-lg-10"><span class="glyphicon glyphicon-usd"></span>
+                            &nbsp;Controle - Dados Bancarios
+                        </label>
+                        
+                        <button id="btnAddDados" class="panel-right col-lg-2 btn btn-default">
+                            <span class="glyphicon glyphicon-chevron-down"></span>&nbsp;Cadastrar
+                        </button>
+
+                        
+
+                    </h1>
+                    
+                </div>
+
+                <div class="panel-body">
+                    <fieldset id="dadosAdd" runat="server">
+                        @Html.Action("CreateDados", "Dados")
+                    </fieldset>
+                    <div align="right">
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Banco)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Agencia)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Dv)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ContaCorrente)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Cpf)
+                                </th>
+                                <th></th>
+                            </tr>
+
+                            @foreach (var item in Model)
+
+                            {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Banco)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Agencia)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Dv)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ContaCorrente)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Cpf)
+                                </td>
+                                <td>
+                                    @{
+                                        var ID = item.DadosBancariosId;
+                                    }
+                                    <button onclick="Editar(@ID)" class="btn btn-default">Alterar &nbsp;<i class="glyphicon glyphicon-pencil"></i></button>
+                                    <button onclick="Deletar(@ID)" class="btn btn-default">Remover&nbsp;<i class="glyphicon glyphicon-remove"></i></button>
+                                </td>
+                            </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        </div>
+
+
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="MeuModal">
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/jquery.jqGrid/ui.jqgrid.css" rel="stylesheet" />
+    <script src="~/Scripts/i18n/grid.locale-en.js"></script>
+    <script src="~/Scripts/jquery.jqGrid.min.js"></script>
+    
+    <script src="~/Scripts/UserDados.js"></script>
+}

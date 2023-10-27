@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Dash";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="container body-content row" style="padding-top: 1%; padding-left: 5%" aling="center">
+    <div class="body-content">
+        <h3><i class="fa fa-line-chart">&nbsp;</i>Dashboard&nbsp;<i class="fa fa-caret-right">&nbsp;Geral</i></h3>
+        <hr/>
+        <div class="col-lg-2" id="indicadorA" style="padding: 3%">
+            <div><label class="col-lg-10">Abertos</label><h4 class="col-lg-2">@ViewBag.DemandasAbertas</h4></div>
+
+        </div>
+        @if (ViewBag.DemandasEncerrado > 0)
+        {
+            <div class="col-lg-2" id="indicadorE" style="padding: 3%">
+                <div><label class="col-lg-10">Encerrados</label><h4 class="col-lg-2">@ViewBag.DemandasEncerrado</h4></div>
+            </div>
+        }
+        
+        @if (ViewBag.DemandasSuspenso > 0)
+        {
+
+            <div class="col-lg-2" id="indicadorS" style="padding: 3%">
+                <div><label class="col-lg-10">Suspenso</label><h4 class="col-lg-2">@ViewBag.DemandasSuspenso</h4></div>
+            </div>
+        }
+        <br />
+        <br />
+        <hr />
+        <div class="col-lg-10">
+            <img src="@Url.Action("Grafico", "PainelSGR")" alt="Linhas" id="Barras">
+        </div>
+    </div>
+</div>

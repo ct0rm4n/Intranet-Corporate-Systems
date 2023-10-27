@@ -1,0 +1,52 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    var user = User.Identity.GetUserName();
+}
+<body>
+    <div id="lateral">
+        <div align="center">
+            <img src='@Html.Action("UserAvatar", "Manage")' onclick="GerenciarAvatar()" id="AvatarUser" />
+        </div>
+        <br />
+        <div class="dropbtnLegenda">
+            <div align="left"><i class="fa fa-cogs"></i>&nbsp;@user.ToString()</div>
+        </div>
+        <br />
+        <div class="Menulateral" align="left">
+            <div class="dropdown">
+                <button data-toggle="collapse" data-target="#dash" class="dropbtn"><i class="glyphicon glyphicon-dashboard" style="float:left"></i> Dashboard<i class="glyphicon glyphicon-chevron-down" id="icon_Menu_down"></i></button>
+                <ul class="sub-menu collapse" id="dash">
+                    <li class="dropdown-content">
+                        <a href="@Url.Action("Index", "Relatorio")"><i class="glyphicon glyphicon-chevron-right" style="float:left"></i>Relatórios</a>
+                        <a href="@Url.Action("Index", "Financeiro")"><i class="glyphicon glyphicon-chevron-right" style="float:left"></i>Financeiro</a>
+                    </li>
+                </ul>
+                <button data-toggle="collapse" data-target="#cadast" class="dropbtn"><i class="glyphicon glyphicon-align-justify" style="float:left"></i>Cadastros<i class="glyphicon glyphicon-chevron-down" id="icon_Menu_down"></i></button>
+                <ul class="sub-menu collapse" id="cadast">
+                    <li class="dropdown-content">
+                        <a href="@Url.Action("Index", "Administrador")"><i class="glyphicon glyphicon-chevron-right" style="float:left"></i>Empresas</a>
+                        <a href="@Url.Action("ControleEmp", "Administrador")"><i class="glyphicon glyphicon-chevron-right" style="float:left"></i>C.Custo</a>
+                    </li>
+                </ul>
+                <button data-toggle="collapse" data-target="#reuniao" class="dropbtn"><i class="glyphicon glyphicon-lock" style="float:left"></i>Relatórios<i class="glyphicon glyphicon-chevron-down" id="icon_Menu_down"></i></button>
+                <ul class="sub-menu collapse" id="reuniao">
+                    <li class="dropdown-content">
+                        <a href="@Url.Action("Index", "Relatorio")"><i class="glyphicon glyphicon-chevron-right"></i> Geral</a>
+                        <a href="@Url.Action("Index", "Relatorio")"><i class="glyphicon glyphicon-chevron-right"></i> Aprovador</a>
+                        <a href="@Url.Action("Index", "Relatorio")"><i class="glyphicon glyphicon-chevron-right"></i> Financeiro</a>
+                    </li>
+                </ul>
+                <button data-toggle="collapse" data-target="#usuario" class="dropbtn"><i class="glyphicon glyphicon-user" style="float:left"></i>Usuários<i class="glyphicon glyphicon-chevron-down" id="icon_Menu_down"></i></button>
+                <ul class="sub-menu collapse" id="usuario">
+                    <li class="dropdown-content">
+                        <a href="@Url.Action("Index", "UsersAdmin")"><i class="glyphicon glyphicon-chevron-right"></i> Controle de Usuários</a>
+                    </li>
+                    <!-- mais links -->
+                </ul>
+                <br />
+            </div>
+            <!-- mais seções -->
+        </div> <!-- /#menu -->
+    </div> <!-- vazio --> <div>
+    </div> <!-- /#lateral -->
+</body>

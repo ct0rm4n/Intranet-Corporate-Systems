@@ -1,0 +1,91 @@
+﻿@model IntraNet.Mod.SGR.Models.ViewModel.CreateReuniaoViewModel
+@{
+    ViewBag.Title = "Create";
+    Layout = null;
+}
+<div class="container body-content">
+
+
+    @using (Ajax.BeginForm("Create", "Reuniao", new AjaxOptions { OnBegin = "", OnFailure = "" }, new { id = "CreateReuniao" }))
+    {
+
+        @Html.AntiForgeryToken()
+
+        <div>
+            <h2 align="left">
+                <i class="glyphicon glyphicon-plus">&nbsp;</i>Inserir nova Reunião
+            </h2>
+
+            <div class="form-horizontal" align="left">
+                <hr />
+                <p align="center">Preencha o formulário abaixo com os dados da nova reunião.</p><br />
+                <div class="container body-content" align="left">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div id="result"></div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TemaId, "Selecione um tema:", htmlAttributes: new { @class = "control-label col-md-5", @id = "CreateReuniao" })
+                        @Html.DropDownList("TemaId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.TemaId, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Nome, "Dê o nome:", htmlAttributes: new { @class = "control-label col-md-5", @id = "CreateReuniao" })
+                        @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control", @id = "Nome" } })
+                        @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Observac, "Observação:", htmlAttributes: new { @class = "control-label col-md-5", @id = "CreateReuniao" })
+                        @Html.TextAreaFor(model => model.Observac, htmlAttributes: new { @class = "form-control", row = 5, @id = "Nome" })
+                        @Html.ValidationMessageFor(model => model.Observac, "", new { @class = "text-danger" })
+                    </div>
+                    <hr />
+                    <div class="col-md-5" style="padding-right:0; padding-left:3%;">
+                        @Html.Label("Usuarios:")
+                        @Html.ListBox("UserId", null, htmlAttributes: new { @class = "form-control", size = 14, @id = "UserId", @Style = "width:100%;", @Value = ViewBag.UserId })
+                    </div>
+                    <div class="col-md-1" align="center">
+                        <div align="right">
+                            <br />
+                            <button type="button" class="btn btn-default" onclick="AddMod();">
+                                <i class="glyphicon glyphicon-chevron-right"></i>
+                            </button>
+                            <button type="button" class="btn btn-default" onclick="RemoveMod();">
+                                <i class="glyphicon glyphicon-chevron-left"></i>
+                            </button>
+                            <button type="button" class="btn btn-default" onclick="RemoveAllMod();">
+                                <i class="glyphicon glyphicon-backward"></i>
+                            </button>
+                            <br /><br /><br />
+                            <button type="button" class="btn btn-default" onclick="AddUser();">
+                                <i class="glyphicon glyphicon-chevron-right"></i>
+                            </button>
+                            <button type="button" class="btn btn-default" onclick="RemoveUser();">
+                                <i class="glyphicon glyphicon-chevron-left"></i>
+                            </button>
+                            <button type="button" class="btn btn-default" onclick="RemoveAllUser();">
+                                <i class="glyphicon glyphicon-backward"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group row" align="right">
+                        <div class="col-sm-4" align="left">
+                            @Html.Label("Moderadores:")
+                            <div align="right" style="padding-left:2%;">
+                                @Html.ListBox("ListaModerador", new List<SelectListItem>(), htmlAttributes: new { @class = "form-control", @id = "UserMod", size = 5 })
+                            </div>
+                            <br />
+                            @Html.Label("Usuários:")
+                            <div style="padding-left:2%;">
+                                @Html.ListBox("ListaParticipantes", new List<SelectListItem>(), htmlAttributes: new { @class = "form-control", @id = "UserName", size = 5 })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    }
+    <div align="right">
+        <button type="button" id="Salvar" class="btn btn-default btnReuniao" onclick="InserirReuniao()"><i class="glyphicon glyphicon-ok-sign">&nbsp;</i> Salvar</button><button type="button" id="Salvar" class="btn btn-default btnReuniao" onclick="$('.modal fade, #myModal').hide()"> <i class="glyphicon glyphicon-remove">&nbsp;</i>Cancelar</button>
+    </div>
+</div>

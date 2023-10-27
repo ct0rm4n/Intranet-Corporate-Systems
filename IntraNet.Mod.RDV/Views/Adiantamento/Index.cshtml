@@ -1,0 +1,132 @@
+﻿@model List<IntraNet.Mod.RDV.Models.ViewModel.AdiantamentoViewModel>
+@{ 
+    List<int> adiantamentoid = new List<int>();
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div>
+            <div class="panel panel-primary" style="width: 100%">
+                <div class="panel-heading">
+                    <div align="left" class="panel-title row">                        
+                        <h4 class="col-lg-8" align="center">
+                            <img src="~/Images/Adiantamento.png" width="5%" />
+                            &nbsp;Solicitaçoes de Adiantamento
+                        </h4>
+                        <div class="col-lg-4" >
+                            <div class="row col-lg-12">
+                                <button onclick="InserirAdiantamento()" class="panel-right btn btn-default">
+                                    Criar Adiantamento &nbsp;<i class="glyphicon glyphicon-plus"></i>
+                                </button>
+                            </div>                            
+                        </div>
+                    </div>                    
+                </div>
+
+                <div class="panel-body">                   
+                    <div align="right">
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    <div class="dropdown">
+                                        <span><i class="glyphicon glyphicon-question-sign"></i>&nbsp;<b>Sit</b></span>
+                                        <div class="dropdown-content" id="ListaLegenda">
+                                            <p align="center">&nbsp;*Situações</p>
+                                            <hr />
+                                            <p><img src="~/Images/Legendas/legenda_incompleto.png" width="15" />&nbsp; - &nbsp; Incompleto</p>
+                                            <p><img src="~/Images/Legendas/legenda_pen_revisao.png" width="15" />&nbsp; - &nbsp; Pend. Revisão</p>
+                                            <p><img src="~/Images/Legendas/legenda_pen_aprovacaopng.png" width="15" />&nbsp; - &nbsp; Pend. Aprovação</p>
+                                            <p><img src="~/Images/Legendas/legenda_aprovado.png" width="15" />&nbsp; - &nbsp; Pend. Aprovado</p>
+                                            <p><img src="~/Images/Legendas/legenda_pago.png" width="15" />&nbsp; - &nbsp; Pgto. realizado</p>
+
+                                        </div>
+                                    </div>
+                                </th>
+   
+                                <th>
+                                    @Html.DisplayName("Data Viagem:")
+                                </th>
+
+                                <th>
+                                    @Html.DisplayName("Valor:")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Conta para deposito:")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Aprovador:")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("")
+                                </th>
+                            </tr>
+                            @if (Model != null)
+                            {
+
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.EditorFor(modelItem => item.Situacao, new { htmlAttributes = new { @class = "form-control col-md-1 Situacao", @disabled = "disabled", @id = "Situacao_" + item.AdiantamentoId + "", @title = "Adiantamento: " + item.Situacao + "" } })
+                                            @{  adiantamentoid.Add(item.AdiantamentoId);}
+                                        </td>
+                                        
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DataPrevista)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.AdiantamentoValor)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.dadosbancarios.Banco)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.aprovador.ArpovName)
+                                        </td>
+                                        <td>
+                                            <button title="Baixar PDF" class="btn btn-default col-md-5" onclick="location.href ='@Url.Action("FinanceiroReport", "Adiantamento", new { id=@item.AdiantamentoId})'"><i class="glyphicon glyphicon-download-alt"></i></button>
+                                            <button class="btn btn-default  col-md-5" onclick="AprovarAdiantamento(@item.AdiantamentoId)">
+                                                <i class="glyphicon glyphicon-ok"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--MODAL-->
+<div class="loading" id="loading">Carregando..&#8230;</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="MeuModal">
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/Repositories/AdiantamentoRepositorie.js"></script>
+    <script src="~/Scripts/Interface/AdiantamentoInter.js"></script>
+    <script src="~/Scripts/UserRelatorio.js"></script>
+    <script type="text/javascript">
+    @foreach (var d in adiantamentoid)
+    {
+        <text>
+        var sit = "#Situacao_" + @d;
+        situacao(sit);
+        </text>
+    }
+
+    </script>
+
+}

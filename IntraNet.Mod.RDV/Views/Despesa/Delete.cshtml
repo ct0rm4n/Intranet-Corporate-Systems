@@ -1,0 +1,46 @@
+﻿@model IntraNet.Domain.Entities.Despesas
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = null;
+}
+
+<h2><i class="glyphicon glyphicon-remove-circle">&nbsp;</i>Remover</h2>
+
+<h3>Deseja realmente remover essa despesa?</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Observacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Observacao)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Valor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Valor)
+        </dd>
+
+        
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color" align="right">
+            <input type="submit" value="Confirmar" class="btn btn-default" /> <input type="reset" value="Cancelar" class="btn btn-default" /> 
+        </div>
+    }

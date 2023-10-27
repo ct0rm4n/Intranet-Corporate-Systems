@@ -1,0 +1,120 @@
+﻿@model IntraNet.Mod.SGR.Models.Identity.EditUserViewModel
+@{
+    ViewBag.Title = "Editar";
+    Layout = null;
+}
+<div>
+    @using (Ajax.BeginForm("EditAdmin", "User", new AjaxOptions { OnBegin = "", OnFailure = "" }, new { id = "EditAdmin" }))
+    {
+        @Html.AntiForgeryToken()
+        <h4><i class="fa fa-user-plus"></i>&nbsp;Editar conta</h4>
+        
+        <hr />
+        @Html.ValidationSummary("", new { @class = "text-error" })
+       
+        <div class="form-horizontal" align="left">
+
+            <div>
+                <div id="result"></div>
+                <div class="row col-lg-12 form-group">
+
+                    <div style="display:none;" class="col-lg-6">
+
+                        <div class="col-lg-12">
+                            @Html.HiddenFor(m => m.Id, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <label class="col-md-5">Empresa&nbsp;</label>
+                        <div class="col-lg-12">
+                            @Html.DropDownListFor(m => m.UnidadeId, null, "Selecione a empresa", new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <label class="col-md-4">Setor:&nbsp;</label>
+                        <div class="col-lg-12">
+                            @Html.DropDownListFor(m => m.SetorId, null, "Selecione o setor", new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-lg-12 form-group">
+                    <div class="col-lg-6">
+                        @Html.LabelFor(m => m.Funcao, "Função:", new { @class = "col-md-5" })
+                        <div class="col-md-12">
+                            @Html.DropDownListFor(m => m.FuncaoId, null, "Selecione a função", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        @Html.LabelFor(m => m.Matricula, "Nº Matricula:", new { @class = "col-md-7" })
+                        <div class="col-md-12">
+                            @Html.TextBoxFor(m => m.Matricula, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-lg-12 form-group">
+                    <div class="col-lg-6">
+                        @Html.LabelFor(m => m.Email, "E-Mail:", new { @class = "col-md-3" })
+                        <div class="col-lg-12">
+                            @Html.TextBoxFor(m => m.Email, htmlAttributes: new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        @Html.LabelFor(m => m.UserName, "Id de usuário", new { @class = "col-md-7" })
+                        <div class="col-lg-12">
+                            @Html.TextBoxFor(m => m.UserName, htmlAttributes: new { @class = "form-control", })
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-lg-12 form-group">
+                    <div class="col-lg-6">
+                        @Html.LabelFor(m => m.FullName, "Nome completo:", new { @class = "col-md-7" })
+                        <div class="col-md-12">
+                            @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        @Html.LabelFor(m => m.PhoneNumber, "Telefone:", new { @class = "col-md-3" })
+                        <div class="col-md-12">
+
+                            @Html.TextBoxFor(m => m.PhoneNumber, htmlAttributes: new { @class = "form-control", })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-primary" style="width: 100%">
+                <div class="panel-heading row">
+                    <div class="col-lg-10"><label>Usuário&nbsp;<i class="fa fa-caret-right"></i>&nbsp;Privilégio:&nbsp;<i class="fa fa-star-half-o"></i></label></div>
+                </div>
+                <div class="panel-body row" id="ResumoPanel">
+
+                    <div class="row">
+                        <div class="col-lg-12">
+
+                            @foreach (var item in Model.RolesList)
+                            {
+                                <div class="col-lg-3">
+                                    <input type="checkbox" name="SelectedRole" value="@item.Value" checked="@item.Selected" class="checkbox-inline" />
+                                    @Html.Label(item.Value, new { @class = "control-label" })
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    }
+    
+    <div class="form-group">
+        <div class="col-md-12" align="right">
+            <button class="btn btn-default btnReuniao" onclick="AlterarFuncionario()"> <i class="fa fa-lg fa-fw fa-floppy-o">&nbsp;</i>Salvar</button>
+            <button class="btn btn-default btnReuniao" onclick="$('#myModal').modal('hide');"> <i class="fa fa-lg fa-fw fa-ban">&nbsp;</i>Cancelar</button>
+        </div>
+    </div>
+</div>
+

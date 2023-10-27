@@ -1,0 +1,75 @@
+﻿@model IntraNet.Mod.SGR.Models.ViewModel.AcaoDemandaViewModel
+@{
+    Layout = null;
+}
+@using (Ajax.BeginForm("Create", "AcaoDespesas", new AjaxOptions { OnBegin = "", OnFailure = "" }, new { id = "Create" }))
+{
+    @Html.AntiForgeryToken()
+
+    
+<div class="col-lg-12 row" align="left">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div id="NovaAcao" style="display: none; ">
+        <div class="col-lg-1">
+            @Html.LabelFor(model => model.Feito, htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-lg-12">
+                @Html.CheckBoxFor(model => model.Feito, htmlAttributes: new { @class = "chxProjeto", @onchange = "AcaoDemandaHabilitaFeito()" })
+            </div>
+        </div>
+        <div class="row col-lg-3">
+            <div class="col-lg-12">
+                @Html.LabelFor(model => model.Data, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.Demandado, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Demandado, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row col-lg-3">
+            <div class="col-lg-12">
+                @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-12">
+                    @Html.TextAreaFor(model => model.Descricao, htmlAttributes: new { @class = "form-control", rows = 3, cols = 60, style = "width: 100%; max-width: 100%;", placeholder = "Descreva o que foi realizado" })
+                    @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger", style = "width: 100%; max-width: 100%;", placeholder = "Faça uma descrição do que foi feito" })
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+
+            @Html.Label("Demandados?", htmlAttributes: new { @class = "col-md-4" })
+            <div class="col-lg-12 row">
+                @Html.Editor("Demandado", new { htmlAttributes = new { @class = "form-control",  } })
+            </div>
+        </div>
+
+        <script src="~/Scripts/Interface/DemandasInter.js"></script>
+        <div class="row col-lg-2">
+            <div class="col-lg-12">
+                @Html.LabelFor(model => model.Data, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.Data, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    @Html.ValidationMessageFor(model => model.Data, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-1" align="right">
+        <div class="btn btn-default btnReuniaoAddAcao" onclick="form_visibility('#NovaAcao')"><i class="fa fa-lg fa-fw fa-plus"></i></div>
+        <div class="btn btn-default btnReuniaoAddAcao" onclick="alert(" ..")"><i class="fa fa-fw fa-trash-o"></i></div>
+    </div>
+    <div style="display: none">
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.InseridoEm, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.InseridoEm } })
+
+                @Html.EditorFor(model => model.DemandaId, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.DemandaId } })
+                @Html.EditorFor(model => model.ReuniaoId, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.ReuniaoId } })
+
+            </div>
+        </div>
+    </div>
+
+</div>
+}
+<br/>
